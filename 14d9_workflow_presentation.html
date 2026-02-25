@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schedule 14D-9 Production Workflow</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.1/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <style>
-:root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--text:#cbd5e1;--text-bright:#f8fafc;--text-muted:#64748b;--gold:#c9a84c;--gold-dim:#b8941f;--red:#ef4444;--green:#22c55e;--yellow:#eab308;--purple:#7c3aed;--purple-dim:#5b21b6;--white:#f8fafc;--mono:'Consolas','Courier New',monospace;--sans:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+:root{--bg:#0f1117;--bg-deep:#0a0c10;--surface:#1a1d27;--border:#2a2d3a;--text:#cbd5e1;--text-bright:#f8fafc;--text-muted:#64748b;--gold:#c9a84c;--gold-dim:#b8941f;--gold-glow:rgba(201,168,76,.06);--red:#ef4444;--green:#22c55e;--yellow:#eab308;--purple:#7c3aed;--purple-dim:#5b21b6;--white:#f8fafc;--mono:'Consolas','Courier New',monospace;--sans:'Segoe UI','Helvetica Neue',Arial,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
 ::selection{background:var(--gold);color:var(--bg)}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
 /* SIDEBAR */
-.sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--surface);border-right:1px solid var(--border);padding:1.5rem 0;overflow-y:auto;z-index:100}
-.sidebar-title{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:0 1.25rem;margin-bottom:1.25rem}
-.sidebar a{display:flex;align-items:center;gap:.6rem;padding:.45rem 1.25rem;color:var(--text-muted);text-decoration:none;font-size:.78rem;transition:color .2s,background .2s}
-.sidebar a:hover,.sidebar a.active{color:var(--white);background:rgba(201,168,76,.06)}
-.pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:var(--bg-deep);border-right:1px solid var(--border);padding:1.5rem 0;overflow-y:auto;z-index:500;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.sidebar.open{transform:translateX(0)}
+.sidebar-btn{position:fixed;top:1.25rem;left:1.25rem;z-index:600;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;backdrop-filter:blur(12px)}
+.sidebar-btn:hover{border-color:var(--gold);color:var(--gold)}
+.sidebar .grp{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);padding:1.25rem 1.25rem .4rem}
+.sidebar a{display:flex;align-items:center;gap:.5rem;padding:.45rem 1.25rem;text-decoration:none;font-size:.78rem;color:var(--text-muted);border-left:2px solid transparent;transition:all .15s}
+.sidebar a:hover{color:var(--white);background:var(--gold-glow);border-left-color:var(--gold)}
+.pip{width:6px;height:6px;border-radius:2px;flex-shrink:0}
 
 /* MAIN */
-.main{margin-left:220px;max-width:960px;padding:0 2.5rem 6rem}
+.container{max-width:1080px;margin:0 auto;padding:0 2rem 8rem}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
@@ -48,19 +51,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .phase-tag{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .7rem;border-radius:4px;color:var(--white);margin-bottom:.6rem}
 .phase-head h2{font-size:1.5rem;color:var(--white);font-weight:600;margin-top:.4rem}
 .phase-sub{font-size:.88rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.5}
-.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;overflow-x:auto}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem 1.75rem;overflow-x:auto}
+.chart-card.purple{border-color:var(--purple)}
+.chart-card .mermaid{display:flex;justify-content:center}
+.chart-card .mermaid svg{max-width:100%;height:auto}
 .chart-card.purple-border{border-color:var(--purple)}
 
 /* FOOTER */
 .footer{margin-top:6rem;padding:2rem 0;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
 
 /* RESPONSIVE */
-@media(max-width:768px){.hero-metrics{flex-direction:column;gap:1.5rem}.legend-grid{flex-direction:column;gap:.8rem}.hero h1{font-size:2.4rem}.sidebar{display:none}.main{margin-left:0}}
+@media(max-width:768px){.hero-metrics{flex-direction:column;gap:1.5rem}.legend-grid{flex-direction:column;gap:.8rem}.hero h1{font-size:2.4rem}}
 </style>
 </head>
 <body>
+<button class="sidebar-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
 <nav class="sidebar">
-  <div class="sidebar-title">14D-9 Workflow</div>
+  <div class="grp">14D-9 Workflow</div>
   <a href="#pre"><span class="pip" style="background:var(--text-muted)"></span>Engagement</a>
   <a href="#g1"><span class="pip" style="background:var(--gold)"></span>Gate 1: Facts</a>
   <a href="#s1"><span class="pip" style="background:#334155"></span>Transaction Summary</a>
@@ -77,7 +84,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
   <a href="#g5"><span class="pip" style="background:var(--gold)"></span>Gate 5: Filing</a>
 </nav>
 
-<div class="main">
+<div class="container">
 <section class="hero" id="hero">
   <h1>Schedule 14D-9<br>Production Workflow</h1>
   <p class="hero-sub">Target's Solicitation / Recommendation Statement — full production lifecycle from tender offer receipt through EDGAR filing within the 10-business-day deadline.</p>
@@ -231,7 +238,7 @@ flowchart TD
 
 <!-- BOARD DELIBERATION FREEZE -->
 <section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">⚠ Freeze</span><h2>Board Deliberation — Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are 🔴 — purely human governance event. No recommendation drafting until the board votes and locks the position.</p>
-<div class="chart-card purple-border"><pre class="mermaid">
+<div class="chart-card purple"><pre class="mermaid">
 flowchart TD
   BD1["Present financial analysis to board / committee"]:::red --> BD2["Present strategic alternatives analysis"]:::red
   BD2 --> BD3["Legal counsel advises on fiduciary duties"]:::red
@@ -369,10 +376,8 @@ flowchart TD
 mermaid.initialize({theme:'dark',themeVariables:{primaryColor:'#1e1e2e',primaryTextColor:'#f8fafc',primaryBorderColor:'#c9a84c',lineColor:'#475569',secondaryColor:'#1a1d27',tertiaryColor:'#0f1117',fontSize:'13px'},flowchart:{curve:'basis',padding:16}});
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08});
 document.querySelectorAll('.phase').forEach(el=>observer.observe(el));
-const links=document.querySelectorAll('.sidebar a');
-const sections=document.querySelectorAll('.phase, .hero');
-const sidebarObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(a)a.classList.add('active')}})},{threshold:0.3});
-sections.forEach(s=>sidebarObs.observe(s));
+document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.sidebar').classList.remove('open')));
+
 </script>
 </body>
 </html>
