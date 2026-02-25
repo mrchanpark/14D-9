@@ -1,0 +1,265 @@
+---
+title: "Schedule 14D-9 Production Workflow — LLM Capability Map v1.0"
+---
+flowchart TD
+
+%% ── CLASS DEFINITIONS ──
+classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+classDef yelD fill:#fbbf24,stroke:#d97706,color:#78350f,font-weight:700
+classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+
+%% ══════════════════════════════════════════════════
+%% PRE-PRODUCTION: ENGAGEMENT & MOBILIZATION
+%% ══════════════════════════════════════════════════
+subgraph PRE["Pre-Production: Engagement & Mobilization"]
+  P01(["Tender offer received / TO filed — trigger event"]):::red
+  P01 --> P02["Engage outside legal counsel"]:::red
+  P02 --> P03["Engage financial advisor"]:::red
+  P03 --> P04{"Conflicts requiring Special Committee?"}:::redD
+  P04 -- Yes --> P05["Form Special Committee & retain independent counsel"]:::red
+  P04 -- No --> P06
+  P05 --> P06["Establish data room & privilege protocols"]:::red
+  P06 --> P07["Calculate 10-business-day response deadline"]:::yel
+  P07 --> P08["Assign production roles & workstreams"]:::red
+  P08 --> P09["Establish document version control"]:::yel
+  P09 --> P10["Initial board briefing on TO terms & timeline"]:::red
+end
+
+%% ══════════════════════════════════════════════════
+%% GATE 1: FACTUAL FOUNDATION LOCK
+%% ══════════════════════════════════════════════════
+subgraph G1["🚧 Gate 1: Factual Foundation Lock"]
+  G1a["Extract terms from TO / merger agreement"]:::yel
+  G1a --> G1b["Verify offer price, form of consideration, timing"]:::red
+  G1b --> G1c["Confirm bidder identity & financing commitments"]:::red
+  G1c --> G1d["Cross-check against bidder's public filings"]:::grn
+  G1d --> G1e{"All transaction facts locked?"}:::redD
+  G1e -- No --> G1a
+  G1e -- Yes --> G1f["Management: ATTESTATION ✓"]:::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 1: TRANSACTION SUMMARY (Items 1–2)
+%% ══════════════════════════════════════════════════
+subgraph S1["Stage 1: Transaction Summary — Items 1–2"]
+  S1a["Subject company information"]:::grn
+  S1a --> S1b["Identity & background of filing person"]:::grn
+  S1b --> S1c["Transaction terms: price, structure, conditions"]:::yel
+  S1c --> S1d["Financing structure & sources"]:::yel
+  S1d --> S1e["Conditions to the offer"]:::yel
+  S1e --> S1f["Compile Items 1–2"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 2: BACKGROUND OF THE TRANSACTION (Item 4)
+%% ══════════════════════════════════════════════════
+subgraph S2["Stage 2: Background of the Transaction"]
+  S2a["Collect board minutes & committee records"]:::red
+  S2a --> S2b["Interview directors & management participants"]:::red
+  S2b --> S2c["Compile chronological contact log"]:::yel
+  S2c --> S2d["Draft initial approach / first contact narrative"]:::yel
+  S2d --> S2e["Draft negotiation phases & term evolution"]:::yel
+  S2e --> S2f["Draft competing / topping bid history (if any)"]:::yel
+  S2f --> S2g["Draft advisor engagement & mandate timeline"]:::yel
+  S2g --> S2h["Draft board / committee meeting narrative"]:::yel
+  S2h --> S2i["Privilege review of all cited communications"]:::red
+  S2i --> S2j["Cross-reference against document retention log"]:::red
+  S2j --> S2k["Compile Background section"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% GATE 2: BACKGROUND NARRATIVE VERIFICATION
+%% ══════════════════════════════════════════════════
+subgraph G2["🚧 Gate 2: Background Narrative Verification"]
+  G2a["Every meeting / contact verified vs. board records"]:::red
+  G2a --> G2b["Privilege review complete — no waiver risk"]:::red
+  G2b --> G2c["Timeline internally consistent"]:::grn
+  G2c --> G2d["Competing bid disclosure complete & accurate"]:::red
+  G2d --> G2e{"All verified & privilege-safe?"}:::redD
+  G2e -- No --> G2a
+  G2e -- Yes --> G2f["Lead Counsel: ATTESTATION ✓"]:::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 3: FINANCIAL ANALYSIS & PROJECTIONS
+%% ══════════════════════════════════════════════════
+subgraph S3["Stage 3: Financial Analysis & Projections"]
+  S3a["Receive financial advisor's preliminary analysis"]:::red
+  S3a --> S3b["Draft comparable companies analysis summary"]:::grn
+  S3b --> S3c["Draft precedent transactions summary"]:::grn
+  S3c --> S3d["Draft DCF analysis summary"]:::grn
+  S3d --> S3e["Draft premiums paid analysis"]:::grn
+  S3e --> S3f["Draft other methodologies (LBO, sum-of-parts)"]:::grn
+  S3f --> S3g["Document assumptions & limitations for each method"]:::yel
+  S3g --> S3h["Receive management projections (board-approved)"]:::red
+  S3h --> S3i["Draft projection tables with key line items"]:::yel
+  S3i --> S3j["Document projection methodology & key assumptions"]:::yel
+  S3j --> S3k["Financial advisor reviews summary for accuracy"]:::red
+  S3k --> S3l["Compile Financial Analysis section"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% GATE 3: FAIRNESS OPINION LOCK
+%% ══════════════════════════════════════════════════
+subgraph G3["🚧 Gate 3: Fairness Opinion Lock"]
+  G3a["Final fairness opinion letter received"]:::red
+  G3a --> G3b["Summary accurately reflects full opinion"]:::red
+  G3b --> G3c["Projections in 14D-9 match advisor's inputs"]:::yel
+  G3c --> G3d["Assumptions & limitations properly disclosed"]:::red
+  G3d --> G3e{"Advisor confirms summary accuracy?"}:::redD
+  G3e -- No --> G3b
+  G3e -- Yes --> G3f["Financial Advisor: ATTESTATION ✓"]:::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% BOARD DELIBERATION FREEZE
+%% ══════════════════════════════════════════════════
+subgraph BDF["⚠ Board Deliberation — Required Before Recommendation"]
+  BD1["Present financial analysis to board / committee"]:::red
+  BD1 --> BD2["Present strategic alternatives analysis"]:::red
+  BD2 --> BD3["Legal counsel advises on fiduciary duties"]:::red
+  BD3 --> BD4["Board deliberation (recorded in minutes)"]:::red
+  BD4 --> BD5["Board / committee votes on recommendation"]:::red
+  BD5 --> BD6{"Recommendation locked?"}:::redD
+  BD6 -- No --> BD1
+  BD6 -- Yes --> BD7["Board Chair / Committee Chair: APPROVAL ✓"]:::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 4: RECOMMENDATION & REASONS
+%% ══════════════════════════════════════════════════
+subgraph S4["Stage 4: Recommendation & Reasons"]
+  S4a["Draft recommendation statement (accept / reject / no position)"]:::yel
+  S4a --> S4b["Document positive factors considered by the board"]:::yel
+  S4b --> S4c["Document negative factors & risks considered"]:::yel
+  S4c --> S4d["Document neutral / uncertain factors"]:::yel
+  S4d --> S4e["Draft balancing analysis & weighing of factors"]:::yel
+  S4e --> S4f["Document process safeguards relied upon"]:::yel
+  S4f --> S4g["Document dissenting views (if any)"]:::red
+  S4g --> S4h["Legal review — Revlon / Unocal / fiduciary compliance"]:::red
+  S4h --> S4i["Compile Recommendation & Reasons"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 5: CONFLICTS, INTERESTS & GOVERNANCE (Item 3)
+%% ══════════════════════════════════════════════════
+subgraph S5["Stage 5: Conflicts, Interests & Governance"]
+  S5a["Director & officer equity holdings"]:::yel
+  S5a --> S5b["Stock options, RSUs, equity award treatment"]:::yel
+  S5b --> S5c["Change-of-control / severance provisions"]:::red
+  S5c --> S5d["Golden parachute calculations (Item 402(t))"]:::yel
+  S5d --> S5e["Ongoing employment / consulting arrangements with bidder"]:::red
+  S5e --> S5f["Director relationships or arrangements with bidder"]:::red
+  S5f --> S5g["Special Committee independence confirmation"]:::red
+  S5g --> S5h["Quantify total payments per individual"]:::yel
+  S5h --> S5i["Draft Item 3 — interests & conflicts table"]:::yel
+  S5i --> S5j["Legal review — completeness of conflict disclosures"]:::red
+  S5j --> S5k["Compile Conflicts & Interests section"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 6: LEGAL, REGULATORY & SHAREHOLDER RIGHTS
+%% ══════════════════════════════════════════════════
+subgraph S6["Stage 6: Legal, Regulatory & Shareholder Rights"]
+  S6a["Appraisal / dissent rights analysis"]:::yel
+  S6a --> S6b["Draft appraisal rights notice language"]:::yel
+  S6b --> S6c["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
+  S6c --> S6d["Status of regulatory filings & expected timeline"]:::red
+  S6d --> S6e["Forward-looking statements safe harbor language"]:::grn
+  S6e --> S6f["Information about the subject company"]:::grn
+  S6f --> S6g["Intent to tender disclosures (directors & officers)"]:::red
+  S6g --> S6h["SEC compliance review — Regulation 14D"]:::red
+  S6h --> S6i["Compile Legal & Regulatory sections"]:::grnC
+end
+
+%% ══════════════════════════════════════════════════
+%% GATE 4: SEC COMPLIANCE LOCK
+%% ══════════════════════════════════════════════════
+subgraph G4["🚧 Gate 4: SEC Compliance Lock"]
+  G4a["Schedule 14D-9 item checklist — all items addressed"]:::grn
+  G4a --> G4b["Regulation 14D-101 compliance verified"]:::red
+  G4b --> G4c["Appraisal rights properly noticed per state law"]:::red
+  G4c --> G4d["Golden parachute calculations verified by counsel"]:::red
+  G4d --> G4e{"All disclosure requirements met?"}:::redD
+  G4e -- No --> G4a
+  G4e -- Yes --> G4f["SEC Counsel: PREREQUISITE ✓"]:::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% STAGE 7: EXHIBITS & FINAL ASSEMBLY
+%% ══════════════════════════════════════════════════
+subgraph S7["Stage 7: Exhibits & Final Assembly"]
+  S7a["Attach fairness opinion letter (Exhibit (a))"]:::red
+  S7a --> S7b["Attach or incorporate merger agreement"]:::red
+  S7b --> S7c["Draft letter to shareholders"]:::yel
+  S7c --> S7d["Prepare information statement (if required)"]:::yel
+  S7d --> S7e["Compile exhibit index"]:::grn
+  S7e --> S7f["Assemble full document"]:::grnC
+  S7f --> S7g["Cross-reference verification"]:::grn
+  S7g --> S7h["EDGAR formatting & filing codes"]:::yel
+  S7h --> S7i["Final proofread"]:::grn
+end
+
+%% ══════════════════════════════════════════════════
+%% GATE 5: FINAL REVIEW & FILING AUTHORIZATION
+%% ══════════════════════════════════════════════════
+subgraph G5["🚧 Gate 5: Final Review & Filing Authorization"]
+  Q1["All Schedule 14D-9 items addressed"]:::grn
+  Q1 --> Q2["Financial figures consistent throughout"]:::grn
+  Q2 --> Q3["Background narrative matches board minutes"]:::red
+  Q3 --> Q4["Fairness opinion summary approved by advisor"]:::red
+  Q4 --> Q5["Golden parachute calculations verified"]:::yel
+  Q5 --> Q6["Appraisal rights properly noticed"]:::red
+  Q6 --> Q7["Forward-looking statements disclaimered"]:::grn
+  Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
+  Q8 --> Q9["Exhibit list complete & attached"]:::grn
+  Q9 --> Q10["EDGAR formatting verified"]:::yel
+  Q10 --> Q11["Filing within 10-business-day deadline confirmed"]:::red
+  Q11 --> Q12["Board / committee authorizes filing"]:::red
+  Q12 --> QP{"All checks pass?"}:::redD
+  QP -- No --> Q1
+  QP -- Yes --> QS1["Management: ATTESTATION ✓"]:::redM
+  QS1 --> QS2["Financial Advisor: ATTESTATION ✓"]:::redM
+  QS2 --> QS3["Lead Counsel: CERTIFICATION ✓"]:::redM
+  QS3 --> QS4["Board / Special Committee: APPROVAL ✓"]:::redM
+  QS4 --> DONE(["📄 FILED WITH SEC VIA EDGAR"]):::redM
+end
+
+%% ══════════════════════════════════════════════════
+%% SUBGRAPH CONNECTIONS
+%% ══════════════════════════════════════════════════
+PRE --> G1
+G1 --> S1
+S1 --> S2
+S2 --> G2
+G2 --> S3
+S3 --> G3
+G3 --> BDF
+BDF --> S4
+S4 --> S5
+S5 --> S6
+S6 --> G4
+G4 --> S7
+S7 --> G5
+
+%% ══════════════════════════════════════════════════
+%% SUBGRAPH STYLES
+%% ══════════════════════════════════════════════════
+style PRE fill:#1e1e2e,stroke:#64748b,stroke-width:2px
+style G1 fill:#1e1e2e,stroke:#c9a84c,stroke-width:3px
+style S1 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style S2 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style G2 fill:#1e1e2e,stroke:#c9a84c,stroke-width:3px
+style S3 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style G3 fill:#1e1e2e,stroke:#c9a84c,stroke-width:3px
+style BDF fill:#1e1e2e,stroke:#7c3aed,stroke-width:3px,stroke-dasharray:8 4
+style S4 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style S5 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style S6 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style G4 fill:#1e1e2e,stroke:#c9a84c,stroke-width:3px
+style S7 fill:#1e1e2e,stroke:#334155,stroke-width:2px
+style G5 fill:#1e1e2e,stroke:#c9a84c,stroke-width:3px

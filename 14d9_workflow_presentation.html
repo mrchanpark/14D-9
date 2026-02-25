@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schedule 14D-9 Production Workflow</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.1/mermaid.min.js"></script>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--text:#cbd5e1;--text-bright:#f8fafc;--text-muted:#64748b;--gold:#c9a84c;--gold-dim:#b8941f;--red:#ef4444;--green:#22c55e;--yellow:#eab308;--purple:#7c3aed;--purple-dim:#5b21b6;--white:#f8fafc;--mono:'Consolas','Courier New',monospace;--sans:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--bg)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--surface);border-right:1px solid var(--border);padding:1.5rem 0;overflow-y:auto;z-index:100}
+.sidebar-title{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:0 1.25rem;margin-bottom:1.25rem}
+.sidebar a{display:flex;align-items:center;gap:.6rem;padding:.45rem 1.25rem;color:var(--text-muted);text-decoration:none;font-size:.78rem;transition:color .2s,background .2s}
+.sidebar a:hover,.sidebar a.active{color:var(--white);background:rgba(201,168,76,.06)}
+.pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* MAIN */
+.main{margin-left:220px;max-width:960px;padding:0 2.5rem 6rem}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.hero h1{font-size:3rem;font-weight:700;color:var(--white);letter-spacing:.04em;opacity:0;animation:rise .8s .2s ease forwards}
+.hero-sub{font-size:1rem;color:var(--text-muted);max-width:600px;margin-top:1.25rem;opacity:0;animation:rise .8s .5s ease forwards}
+.hero-metrics{display:flex;gap:3rem;margin-top:4rem;opacity:0;animation:rise .8s .65s ease forwards;flex-wrap:wrap;justify-content:center}
+.hero-metric{text-align:center}.hero-metric .val{font-family:var(--mono);font-size:2.8rem;font-weight:600;color:var(--white);line-height:1}.hero-metric .lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-top:.4rem}
+.hero-scroll{margin-top:auto;padding-top:3rem;padding-bottom:2rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);opacity:0;animation:rise .8s .9s ease forwards}
+.hero-scroll::after{content:'';display:block;width:1px;height:32px;background:linear-gradient(to bottom,var(--gold),transparent);margin:.75rem auto 0}
+
+/* LEGEND */
+.legend-wrap{margin:5rem 0 2rem;padding:1.75rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;position:relative;overflow:visible}
+.legend-wrap::before{content:'LLM CAPABILITY LEGEND';position:absolute;top:-1px;left:2rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--gold);background:var(--surface);padding:0 .5rem;transform:translateY(-50%)}
+.legend-grid{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--text);font-weight:500}
+.legend-pip{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.signoff-wrap{margin:1rem 0 2rem;padding:1.5rem 2rem;background:var(--surface);border:1px solid var(--purple);border-radius:12px;position:relative;overflow:visible}
+.signoff-wrap::before{content:'SIGN-OFF TYPES · v1.0';position:absolute;top:-1px;left:2rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--purple);background:var(--surface);padding:0 .5rem;transform:translateY(-50%)}
+.signoff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.signoff-item{font-size:.78rem;color:var(--text-muted)}.signoff-item strong{color:var(--text-bright);display:block;margin-bottom:.15rem}
+
+/* SECTIONS */
+.phase{margin:4rem 0;opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}
+.phase.visible{opacity:1;transform:translateY(0)}
+.phase-head{margin-bottom:1.5rem}
+.phase-tag{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .7rem;border-radius:4px;color:var(--white);margin-bottom:.6rem}
+.phase-head h2{font-size:1.5rem;color:var(--white);font-weight:600;margin-top:.4rem}
+.phase-sub{font-size:.88rem;color:var(--text-muted);margin-bottom:1.2rem;line-height:1.5}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;overflow-x:auto}
+.chart-card.purple-border{border-color:var(--purple)}
+
+/* FOOTER */
+.footer{margin-top:6rem;padding:2rem 0;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
+
+/* RESPONSIVE */
+@media(max-width:768px){.hero-metrics{flex-direction:column;gap:1.5rem}.legend-grid{flex-direction:column;gap:.8rem}.hero h1{font-size:2.4rem}.sidebar{display:none}.main{margin-left:0}}
+</style>
+</head>
+<body>
+<nav class="sidebar">
+  <div class="sidebar-title">14D-9 Workflow</div>
+  <a href="#pre"><span class="pip" style="background:var(--text-muted)"></span>Engagement</a>
+  <a href="#g1"><span class="pip" style="background:var(--gold)"></span>Gate 1: Facts</a>
+  <a href="#s1"><span class="pip" style="background:#334155"></span>Transaction Summary</a>
+  <a href="#s2"><span class="pip" style="background:#334155"></span>Background</a>
+  <a href="#g2"><span class="pip" style="background:var(--gold)"></span>Gate 2: Narrative</a>
+  <a href="#s3"><span class="pip" style="background:#334155"></span>Financial Analysis</a>
+  <a href="#g3"><span class="pip" style="background:var(--gold)"></span>Gate 3: Fairness</a>
+  <a href="#bdf"><span class="pip" style="background:var(--purple)"></span>Board Deliberation</a>
+  <a href="#s4"><span class="pip" style="background:#334155"></span>Recommendation</a>
+  <a href="#s5"><span class="pip" style="background:#334155"></span>Conflicts</a>
+  <a href="#s6"><span class="pip" style="background:#334155"></span>Legal & Regulatory</a>
+  <a href="#g4"><span class="pip" style="background:var(--gold)"></span>Gate 4: Compliance</a>
+  <a href="#s7"><span class="pip" style="background:#334155"></span>Exhibits & Assembly</a>
+  <a href="#g5"><span class="pip" style="background:var(--gold)"></span>Gate 5: Filing</a>
+</nav>
+
+<div class="main">
+<section class="hero" id="hero">
+  <h1>Schedule 14D-9<br>Production Workflow</h1>
+  <p class="hero-sub">Target's Solicitation / Recommendation Statement — full production lifecycle from tender offer receipt through EDGAR filing within the 10-business-day deadline.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="val">126</div><div class="lbl">Steps</div></div>
+    <div class="hero-metric"><div class="val">7</div><div class="lbl">Stages</div></div>
+    <div class="hero-metric"><div class="val">5</div><div class="lbl">Gates</div></div>
+    <div class="hero-metric"><div class="val" style="color:var(--purple)">1</div><div class="lbl">Freeze</div></div>
+    <div class="hero-metric"><div class="val">9</div><div class="lbl">SEC Items</div></div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="legend-wrap">
+  <div class="legend-grid">
+    <div class="legend-item"><span class="legend-pip" style="background:#ef4444"></span>🔴 LLM Cannot Do — Human Only</div>
+    <div class="legend-item"><span class="legend-pip" style="background:#eab308"></span>🟡 LLM Needs Human Oversight</div>
+    <div class="legend-item"><span class="legend-pip" style="background:#22c55e"></span>🟢 LLM Can Do Independently</div>
+  </div>
+</div>
+<div class="signoff-wrap">
+  <div class="signoff-grid">
+    <div class="signoff-item"><strong>ATTESTATION</strong>Factual data is accurate and verified (Management, Financial Advisor)</div>
+    <div class="signoff-item"><strong>CERTIFICATION</strong>Document production-ready, all items addressed (Lead Counsel)</div>
+    <div class="signoff-item"><strong>APPROVAL</strong>Board recommendation endorsed and authorized (Board / Special Committee)</div>
+    <div class="signoff-item"><strong>PREREQUISITE</strong>SEC disclosure and regulatory requirements fulfilled (SEC Counsel)</div>
+  </div>
+</div>
+
+<!-- PRE-PRODUCTION -->
+<section class="phase" id="pre"><div class="phase-head"><span class="phase-tag" style="background:#64748b">Pre-Prod</span><h2>Engagement & Mobilization</h2></div><p class="phase-sub">Entirely 🔴 — board-level engagement decisions, privilege establishment, 10-business-day clock starts.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A(["Tender offer received / TO filed"]):::red --> B["Engage outside legal counsel"]:::red
+  B --> C["Engage financial advisor"]:::red
+  C --> D{"Conflicts requiring Special Committee?"}:::redD
+  D -- Yes --> E["Form Special Committee & retain independent counsel"]:::red
+  D -- No --> F
+  E --> F["Establish data room & privilege protocols"]:::red
+  F --> G["Calculate 10-business-day response deadline"]:::yel
+  G --> H["Assign production roles & workstreams"]:::red
+  H --> I["Establish document version control"]:::yel
+  I --> J["Initial board briefing on TO terms & timeline"]:::red
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+</pre></div></section>
+
+<!-- GATE 1 -->
+<section class="phase" id="g1"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 1</span><h2>Factual Foundation Lock</h2></div><p class="phase-sub">All transaction facts extracted, verified, and locked before drafting begins. Management attests.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Extract terms from TO / merger agreement"]:::yel --> B["Verify offer price, form of consideration, timing"]:::red
+  B --> C["Confirm bidder identity & financing commitments"]:::red
+  C --> D["Cross-check against bidder's public filings"]:::grn
+  D --> E{"All transaction facts locked?"}:::redD
+  E -- No --> A
+  E -- Yes --> F["Management: ATTESTATION ✓"]:::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+</pre></div></section>
+
+<!-- STAGE 1 -->
+<section class="phase" id="s1"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 1</span><h2>Transaction Summary — Items 1–2</h2></div><p class="phase-sub">Mostly 🟢 — factual company information and transaction terms from locked data.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Subject company information"]:::grn --> B["Identity & background of filing person"]:::grn
+  B --> C["Transaction terms: price, structure, conditions"]:::yel
+  C --> D["Financing structure & sources"]:::yel
+  D --> E["Conditions to the offer"]:::yel
+  E --> F["Compile Items 1–2"]:::grnC
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- STAGE 2 -->
+<section class="phase" id="s2"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 2</span><h2>Background of the Transaction</h2></div><p class="phase-sub">The most sensitive section. Blow-by-blow narrative of how the deal unfolded. Heavy 🔴 for privilege review.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Collect board minutes & committee records"]:::red --> B["Interview directors & management"]:::red
+  B --> C["Compile chronological contact log"]:::yel
+  C --> D["Draft initial approach / first contact"]:::yel
+  D --> E["Draft negotiation phases & term evolution"]:::yel
+  E --> F["Draft competing / topping bid history"]:::yel
+  F --> G["Draft advisor engagement timeline"]:::yel
+  G --> H["Draft board / committee meeting narrative"]:::yel
+  H --> I["Privilege review of all cited communications"]:::red
+  I --> J["Cross-reference against document retention log"]:::red
+  J --> K["Compile Background section"]:::grnC
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- GATE 2 -->
+<section class="phase" id="g2"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 2</span><h2>Background Narrative Verification</h2></div><p class="phase-sub">Every factual claim verified against board records. Privilege review ensures no inadvertent waiver.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Every meeting / contact verified vs. board records"]:::red --> B["Privilege review complete — no waiver risk"]:::red
+  B --> C["Timeline internally consistent"]:::grn
+  C --> D["Competing bid disclosure complete & accurate"]:::red
+  D --> E{"All verified & privilege-safe?"}:::redD
+  E -- No --> A
+  E -- Yes --> F["Lead Counsel: ATTESTATION ✓"]:::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+</pre></div></section>
+
+<!-- STAGE 3 -->
+<section class="phase" id="s3"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 3</span><h2>Financial Analysis & Projections</h2></div><p class="phase-sub">Valuation summary drafting is heavily 🟢. Management projections (🔴) require board approval. Advisor reviews final summary.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Receive financial advisor's preliminary analysis"]:::red --> B["Draft comparable companies summary"]:::grn
+  B --> C["Draft precedent transactions summary"]:::grn
+  C --> D["Draft DCF analysis summary"]:::grn
+  D --> E["Draft premiums paid analysis"]:::grn
+  E --> F["Draft other methodologies (LBO, sum-of-parts)"]:::grn
+  F --> G["Document assumptions & limitations"]:::yel
+  G --> H["Receive management projections (board-approved)"]:::red
+  H --> I["Draft projection tables"]:::yel
+  I --> J["Document projection methodology & key assumptions"]:::yel
+  J --> K["Financial advisor reviews summary for accuracy"]:::red
+  K --> L["Compile Financial Analysis section"]:::grnC
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- GATE 3 -->
+<section class="phase" id="g3"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 3</span><h2>Fairness Opinion Lock</h2></div><p class="phase-sub">Final fairness opinion received. Summary must accurately reflect the full opinion. Financial advisor attests.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Final fairness opinion letter received"]:::red --> B["Summary accurately reflects full opinion"]:::red
+  B --> C["Projections in 14D-9 match advisor's inputs"]:::yel
+  C --> D["Assumptions & limitations properly disclosed"]:::red
+  D --> E{"Advisor confirms summary accuracy?"}:::redD
+  E -- No --> B
+  E -- Yes --> F["Financial Advisor: ATTESTATION ✓"]:::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+</pre></div></section>
+
+<!-- BOARD DELIBERATION FREEZE -->
+<section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">⚠ Freeze</span><h2>Board Deliberation — Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are 🔴 — purely human governance event. No recommendation drafting until the board votes and locks the position.</p>
+<div class="chart-card purple-border"><pre class="mermaid">
+flowchart TD
+  BD1["Present financial analysis to board / committee"]:::red --> BD2["Present strategic alternatives analysis"]:::red
+  BD2 --> BD3["Legal counsel advises on fiduciary duties"]:::red
+  BD3 --> BD4["Board deliberation (recorded in minutes)"]:::red
+  BD4 --> BD5["Board / committee votes on recommendation"]:::red
+  BD5 --> BD6{"Recommendation locked?"}:::redD
+  BD6 -- No --> BD1
+  BD6 -- Yes --> BD7["Board Chair / Committee Chair: APPROVAL ✓"]:::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- STAGE 4 -->
+<section class="phase" id="s4"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 4</span><h2>Recommendation & Reasons</h2></div><p class="phase-sub">Mostly 🟡 — LLM drafts from board records, every sentence needs fiduciary compliance review.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Draft recommendation statement"]:::yel --> B["Document positive factors considered"]:::yel
+  B --> C["Document negative factors & risks considered"]:::yel
+  C --> D["Document neutral / uncertain factors"]:::yel
+  D --> E["Draft balancing analysis"]:::yel
+  E --> F["Document process safeguards relied upon"]:::yel
+  F --> G["Document dissenting views (if any)"]:::red
+  G --> H["Legal review — Revlon / Unocal / fiduciary"]:::red
+  H --> I["Compile Recommendation & Reasons"]:::grnC
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- STAGE 5 -->
+<section class="phase" id="s5"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 5</span><h2>Conflicts, Interests & Governance</h2></div><p class="phase-sub">Mixed 🔴/🟡 — equity math is LLM-computable. Employment arrangements and director relationships require human disclosure.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Director & officer equity holdings"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
+  B --> C["Change-of-control / severance provisions"]:::red
+  C --> D["Golden parachute calculations (Item 402(t))"]:::yel
+  D --> E["Ongoing employment arrangements with bidder"]:::red
+  E --> F["Director relationships with bidder"]:::red
+  F --> G["Special Committee independence confirmation"]:::red
+  G --> H["Quantify total payments per individual"]:::yel
+  H --> I["Draft Item 3 — interests & conflicts table"]:::yel
+  I --> J["Legal review — completeness of disclosures"]:::red
+  J --> K["Compile Conflicts & Interests section"]:::grnC
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- STAGE 6 -->
+<section class="phase" id="s6"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 6</span><h2>Legal, Regulatory & Shareholder Rights</h2></div><p class="phase-sub">Heavy 🔴 — regulatory filings, intent to tender, SEC compliance. Safe harbor language is 🟢.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Appraisal / dissent rights analysis"]:::yel --> B["Draft appraisal rights notice"]:::yel
+  B --> C["Identify regulatory approvals (HSR, CFIUS)"]:::red
+  C --> D["Status of regulatory filings & timeline"]:::red
+  D --> E["Forward-looking statements safe harbor"]:::grn
+  E --> F["Information about the subject company"]:::grn
+  F --> G["Intent to tender disclosures"]:::red
+  G --> H["SEC compliance review — Regulation 14D"]:::red
+  H --> I["Compile Legal & Regulatory sections"]:::grnC
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- GATE 4 -->
+<section class="phase" id="g4"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 4</span><h2>SEC Compliance Lock</h2></div><p class="phase-sub">Every Schedule 14D-9 item addressed. Regulation 14D compliance confirmed. SEC Counsel provides prerequisite.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Schedule 14D-9 item checklist — all items addressed"]:::grn --> B["Regulation 14D-101 compliance verified"]:::red
+  B --> C["Appraisal rights properly noticed per state law"]:::red
+  C --> D["Golden parachute calculations verified by counsel"]:::red
+  D --> E{"All disclosure requirements met?"}:::redD
+  E -- No --> A
+  E -- Yes --> F["SEC Counsel: PREREQUISITE ✓"]:::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+</pre></div></section>
+
+<!-- STAGE 7 -->
+<section class="phase" id="s7"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 7</span><h2>Exhibits & Final Assembly</h2></div><p class="phase-sub">Exhibit attachment is 🔴. Cross-referencing and compilation are 🟢. EDGAR formatting is 🟡.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  A["Attach fairness opinion letter (Exhibit (a))"]:::red --> B["Attach or incorporate merger agreement"]:::red
+  B --> C["Draft letter to shareholders"]:::yel
+  C --> D["Prepare information statement (if required)"]:::yel
+  D --> E["Compile exhibit index"]:::grn
+  E --> F["Assemble full document"]:::grnC
+  F --> G["Cross-reference verification"]:::grn
+  G --> H["EDGAR formatting & filing codes"]:::yel
+  H --> I["Final proofread"]:::grn
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+  classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
+</pre></div></section>
+
+<!-- GATE 5 -->
+<section class="phase" id="g5"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 5</span><h2>Final Review & Filing Authorization</h2></div><p class="phase-sub">12 QC checks + 4-tier sign-off chain. Board authorizes filing. Attestations → Certification → Approval.</p>
+<div class="chart-card"><pre class="mermaid">
+flowchart TD
+  Q1["All Schedule 14D-9 items addressed"]:::grn --> Q2["Financial figures consistent"]:::grn
+  Q2 --> Q3["Background matches board minutes"]:::red
+  Q3 --> Q4["Fairness opinion summary approved by advisor"]:::red
+  Q4 --> Q5["Golden parachute calculations verified"]:::yel
+  Q5 --> Q6["Appraisal rights properly noticed"]:::red
+  Q6 --> Q7["Forward-looking statements disclaimered"]:::grn
+  Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
+  Q8 --> Q9["Exhibit list complete & attached"]:::grn
+  Q9 --> Q10["EDGAR formatting verified"]:::yel
+  Q10 --> Q11["Filing within 10-business-day deadline"]:::red
+  Q11 --> Q12["Board / committee authorizes filing"]:::red
+  Q12 --> QP{"All checks pass?"}:::redD
+  QP -- No --> Q1
+  QP -- Yes --> S1x["Management: ATTESTATION ✓"]:::redM
+  S1x --> S2x["Financial Advisor: ATTESTATION ✓"]:::redM
+  S2x --> S3x["Lead Counsel: CERTIFICATION ✓"]:::redM
+  S3x --> S4x["Board / Special Committee: APPROVAL ✓"]:::redM
+  S4x --> DONE(["📄 FILED WITH SEC VIA EDGAR"]):::redM
+  classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
+  classDef redD fill:#f87171,stroke:#dc2626,color:#7f1d1d,font-weight:700
+  classDef redM fill:#dc2626,stroke:#b91c1c,color:#fff,font-weight:700
+  classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
+</pre></div></section>
+
+<div class="footer">Schedule 14D-9 Production Workflow v1.0 · LLM Capability Map · Confidential</div>
+</div>
+
+<script>
+mermaid.initialize({theme:'dark',themeVariables:{primaryColor:'#1e1e2e',primaryTextColor:'#f8fafc',primaryBorderColor:'#c9a84c',lineColor:'#475569',secondaryColor:'#1a1d27',tertiaryColor:'#0f1117',fontSize:'13px'},flowchart:{curve:'basis',padding:16}});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08});
+document.querySelectorAll('.phase').forEach(el=>observer.observe(el));
+const links=document.querySelectorAll('.sidebar a');
+const sections=document.querySelectorAll('.phase, .hero');
+const sidebarObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(a)a.classList.add('active')}})},{threshold:0.3});
+sections.forEach(s=>sidebarObs.observe(s));
+</script>
+</body>
+</html>
