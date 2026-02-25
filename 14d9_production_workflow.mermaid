@@ -1,5 +1,5 @@
 ---
-title: "Schedule 14D-9 Production Workflow — LLM Capability Map v1.0"
+title: "Schedule 14D-9 Production Workflow — LLM Capability Map v1.1"
 ---
 flowchart TD
 
@@ -14,16 +14,19 @@ classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
 
 %% ══════════════════════════════════════════════════
 %% PRE-PRODUCTION: ENGAGEMENT & MOBILIZATION
+%% Clock starts at commencement — when the TO is first
+%% published, sent or given to holders (Rule 14d-2),
+%% not necessarily when the Schedule TO is filed.
 %% ══════════════════════════════════════════════════
 subgraph PRE["Pre-Production: Engagement & Mobilization"]
-  P01(["Tender offer received / TO filed — trigger event"]):::red
+  P01(["Tender offer commenced (first published, sent or given to holders)"]):::red
   P01 --> P02["Engage outside legal counsel"]:::red
   P02 --> P03["Engage financial advisor"]:::red
   P03 --> P04{"Conflicts requiring Special Committee?"}:::redD
   P04 -- Yes --> P05["Form Special Committee & retain independent counsel"]:::red
   P04 -- No --> P06
   P05 --> P06["Establish data room & privilege protocols"]:::red
-  P06 --> P07["Calculate 10-business-day response deadline"]:::yel
+  P06 --> P07["Calculate 10-business-day deadline from commencement date"]:::yel
   P07 --> P08["Assign production roles & workstreams"]:::red
   P08 --> P09["Establish document version control"]:::yel
   P09 --> P10["Initial board briefing on TO terms & timeline"]:::red
@@ -43,19 +46,24 @@ subgraph G1["🚧 Gate 1: Factual Foundation Lock"]
 end
 
 %% ══════════════════════════════════════════════════
-%% STAGE 1: TRANSACTION SUMMARY (Items 1–2)
+%% STAGE 1: SUBJECT COMPANY & OFFER OVERVIEW
+%% Covers Items 1–2 (identity) plus offer-context
+%% facts drawn from locked Gate 1 data.
+%% See Item Coverage Map for full item-to-stage mapping.
 %% ══════════════════════════════════════════════════
-subgraph S1["Stage 1: Transaction Summary — Items 1–2"]
-  S1a["Subject company information"]:::grn
-  S1a --> S1b["Identity & background of filing person"]:::grn
+subgraph S1["Stage 1: Subject Company & Offer Overview"]
+  S1a["Subject company information (Item 1)"]:::grn
+  S1a --> S1b["Identity & background of filing person (Item 2)"]:::grn
   S1b --> S1c["Transaction terms: price, structure, conditions"]:::yel
   S1c --> S1d["Financing structure & sources"]:::yel
   S1d --> S1e["Conditions to the offer"]:::yel
-  S1e --> S1f["Compile Items 1–2"]:::grnC
+  S1e --> S1f["Compile Stage 1 section"]:::grnC
 end
 
 %% ══════════════════════════════════════════════════
-%% STAGE 2: BACKGROUND OF THE TRANSACTION (Item 4)
+%% STAGE 2: BACKGROUND OF THE TRANSACTION
+%% Covers Items 3–4 (past contacts/negotiations;
+%% solicitation/recommendation context).
 %% ══════════════════════════════════════════════════
 subgraph S2["Stage 2: Background of the Transaction"]
   S2a["Collect board minutes & committee records"]:::red
@@ -130,7 +138,7 @@ subgraph BDF["⚠ Board Deliberation — Required Before Recommendation"]
 end
 
 %% ══════════════════════════════════════════════════
-%% STAGE 4: RECOMMENDATION & REASONS
+%% STAGE 4: RECOMMENDATION & REASONS (Item 4)
 %% ══════════════════════════════════════════════════
 subgraph S4["Stage 4: Recommendation & Reasons"]
   S4a["Draft recommendation statement (accept / reject / no position)"]:::yel
@@ -145,24 +153,30 @@ subgraph S4["Stage 4: Recommendation & Reasons"]
 end
 
 %% ══════════════════════════════════════════════════
-%% STAGE 5: CONFLICTS, INTERESTS & GOVERNANCE (Item 3)
+%% STAGE 5: CONFLICTS, INTERESTS & GOVERNANCE
+%% Covers Items 5 (persons retained/compensated),
+%% Item 6 (interest in securities), and portions of
+%% Item 8 (golden parachute 402(t), employment
+%% arrangements, change-of-control provisions).
 %% ══════════════════════════════════════════════════
 subgraph S5["Stage 5: Conflicts, Interests & Governance"]
-  S5a["Director & officer equity holdings"]:::yel
+  S5a["Director & officer equity holdings (Item 6)"]:::yel
   S5a --> S5b["Stock options, RSUs, equity award treatment"]:::yel
   S5b --> S5c["Change-of-control / severance provisions"]:::red
-  S5c --> S5d["Golden parachute calculations (Item 402(t))"]:::yel
+  S5c --> S5d["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
   S5d --> S5e["Ongoing employment / consulting arrangements with bidder"]:::red
   S5e --> S5f["Director relationships or arrangements with bidder"]:::red
   S5f --> S5g["Special Committee independence confirmation"]:::red
   S5g --> S5h["Quantify total payments per individual"]:::yel
-  S5h --> S5i["Draft Item 3 — interests & conflicts table"]:::yel
+  S5h --> S5i["Draft interests & conflicts tables (Items 5–6 / 8)"]:::yel
   S5i --> S5j["Legal review — completeness of conflict disclosures"]:::red
   S5j --> S5k["Compile Conflicts & Interests section"]:::grnC
 end
 
 %% ══════════════════════════════════════════════════
 %% STAGE 6: LEGAL, REGULATORY & SHAREHOLDER RIGHTS
+%% Covers Item 7 (purposes/plans), Item 8 (additional
+%% information), and portions of Item 9 (exhibits).
 %% ══════════════════════════════════════════════════
 subgraph S6["Stage 6: Legal, Regulatory & Shareholder Rights"]
   S6a["Appraisal / dissent rights analysis"]:::yel
@@ -190,7 +204,7 @@ subgraph G4["🚧 Gate 4: SEC Compliance Lock"]
 end
 
 %% ══════════════════════════════════════════════════
-%% STAGE 7: EXHIBITS & FINAL ASSEMBLY
+%% STAGE 7: EXHIBITS & FINAL ASSEMBLY (Item 9)
 %% ══════════════════════════════════════════════════
 subgraph S7["Stage 7: Exhibits & Final Assembly"]
   S7a["Attach fairness opinion letter (Exhibit (a))"]:::red
@@ -206,6 +220,8 @@ end
 
 %% ══════════════════════════════════════════════════
 %% GATE 5: FINAL REVIEW & FILING AUTHORIZATION
+%% Filing must occur within 10 business days of
+%% commencement (first published, sent or given).
 %% ══════════════════════════════════════════════════
 subgraph G5["🚧 Gate 5: Final Review & Filing Authorization"]
   Q1["All Schedule 14D-9 items addressed"]:::grn
@@ -218,7 +234,7 @@ subgraph G5["🚧 Gate 5: Final Review & Filing Authorization"]
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel
-  Q10 --> Q11["Filing within 10-business-day deadline confirmed"]:::red
+  Q10 --> Q11["Filing within 10-business-day deadline from commencement"]:::red
   Q11 --> Q12["Board / committee authorizes filing"]:::red
   Q12 --> QP{"All checks pass?"}:::redD
   QP -- No --> Q1

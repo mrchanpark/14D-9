@@ -40,9 +40,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .legend-item{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--text);font-weight:500}
 .legend-pip{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .signoff-wrap{margin:1rem 0 2rem;padding:1.5rem 2rem;background:var(--surface);border:1px solid var(--purple);border-radius:12px;position:relative;overflow:visible}
-.signoff-wrap::before{content:'SIGN-OFF TYPES · v1.0';position:absolute;top:-1px;left:2rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--purple);background:var(--surface);padding:0 .5rem;transform:translateY(-50%)}
+.signoff-wrap::before{content:'SIGN-OFF TYPES \00b7 v1.1';position:absolute;top:-1px;left:2rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--purple);background:var(--surface);padding:0 .5rem;transform:translateY(-50%)}
 .signoff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
 .signoff-item{font-size:.78rem;color:var(--text-muted)}.signoff-item strong{color:var(--text-bright);display:block;margin-bottom:.15rem}
+
+/* ITEM MAP */
+.item-map-wrap{margin:1rem 0 2rem;padding:1.5rem 2rem;background:var(--surface);border:1px solid var(--gold-dim);border-radius:12px;position:relative;overflow:visible}
+.item-map-wrap::before{content:'ITEM COVERAGE MAP \00b7 REG 14D-101';position:absolute;top:-1px;left:2rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--gold);background:var(--surface);padding:0 .5rem;transform:translateY(-50%)}
+.item-map-wrap table{width:100%;border-collapse:collapse;font-size:.78rem;color:var(--text)}
+.item-map-wrap th{text-align:left;color:var(--gold);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.5rem .6rem;border-bottom:1px solid var(--border)}
+.item-map-wrap td{padding:.45rem .6rem;border-bottom:1px solid var(--border);vertical-align:top}
+.item-map-wrap td:first-child{color:var(--text-bright);font-weight:600;white-space:nowrap}
+.item-map-wrap tr:last-child td{border-bottom:none}
 
 /* SECTIONS */
 .phase{margin:4rem 0;opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}
@@ -55,7 +64,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 .chart-card.purple{border-color:var(--purple)}
 .chart-card .mermaid{display:flex;justify-content:center}
 .chart-card .mermaid svg{max-width:100%;height:auto}
-.chart-card.purple-border{border-color:var(--purple)}
 
 /* FOOTER */
 .footer{margin-top:6rem;padding:2rem 0;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
@@ -65,19 +73,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 </style>
 </head>
 <body>
-<button class="sidebar-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<button class="sidebar-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
 <nav class="sidebar">
-  <div class="grp">14D-9 Workflow</div>
+  <div class="grp">14D-9 Workflow v1.1</div>
   <a href="#pre"><span class="pip" style="background:var(--text-muted)"></span>Engagement</a>
   <a href="#g1"><span class="pip" style="background:var(--gold)"></span>Gate 1: Facts</a>
-  <a href="#s1"><span class="pip" style="background:#334155"></span>Transaction Summary</a>
+  <a href="#s1"><span class="pip" style="background:#334155"></span>Subject Co. & Offer</a>
   <a href="#s2"><span class="pip" style="background:#334155"></span>Background</a>
   <a href="#g2"><span class="pip" style="background:var(--gold)"></span>Gate 2: Narrative</a>
   <a href="#s3"><span class="pip" style="background:#334155"></span>Financial Analysis</a>
   <a href="#g3"><span class="pip" style="background:var(--gold)"></span>Gate 3: Fairness</a>
   <a href="#bdf"><span class="pip" style="background:var(--purple)"></span>Board Deliberation</a>
   <a href="#s4"><span class="pip" style="background:#334155"></span>Recommendation</a>
-  <a href="#s5"><span class="pip" style="background:#334155"></span>Conflicts</a>
+  <a href="#s5"><span class="pip" style="background:#334155"></span>Conflicts (Items 5&#8211;6/8)</a>
   <a href="#s6"><span class="pip" style="background:#334155"></span>Legal & Regulatory</a>
   <a href="#g4"><span class="pip" style="background:var(--gold)"></span>Gate 4: Compliance</a>
   <a href="#s7"><span class="pip" style="background:#334155"></span>Exhibits & Assembly</a>
@@ -87,7 +95,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 <div class="container">
 <section class="hero" id="hero">
   <h1>Schedule 14D-9<br>Production Workflow</h1>
-  <p class="hero-sub">Target's Solicitation / Recommendation Statement — full production lifecycle from tender offer receipt through EDGAR filing within the 10-business-day deadline.</p>
+  <p class="hero-sub">Target&#8217;s Solicitation / Recommendation Statement &#8212; full production lifecycle from tender offer commencement through EDGAR filing within the 10-business-day deadline (Rule 14e-2(a)).</p>
   <div class="hero-metrics">
     <div class="hero-metric"><div class="val">126</div><div class="lbl">Steps</div></div>
     <div class="hero-metric"><div class="val">7</div><div class="lbl">Stages</div></div>
@@ -100,9 +108,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
 
 <div class="legend-wrap">
   <div class="legend-grid">
-    <div class="legend-item"><span class="legend-pip" style="background:#ef4444"></span>🔴 LLM Cannot Do — Human Only</div>
-    <div class="legend-item"><span class="legend-pip" style="background:#eab308"></span>🟡 LLM Needs Human Oversight</div>
-    <div class="legend-item"><span class="legend-pip" style="background:#22c55e"></span>🟢 LLM Can Do Independently</div>
+    <div class="legend-item"><span class="legend-pip" style="background:#ef4444"></span>&#128308; LLM Cannot Do &#8212; Human Only</div>
+    <div class="legend-item"><span class="legend-pip" style="background:#eab308"></span>&#128993; LLM Needs Human Oversight</div>
+    <div class="legend-item"><span class="legend-pip" style="background:#22c55e"></span>&#128994; LLM Can Do Independently</div>
   </div>
 </div>
 <div class="signoff-wrap">
@@ -114,17 +122,33 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
   </div>
 </div>
 
+<!-- ITEM COVERAGE MAP -->
+<div class="item-map-wrap">
+  <table>
+    <tr><th>Item</th><th>Title (Reg 14D-101 / Reg M-A)</th><th>Primary Stage</th><th>Notes</th></tr>
+    <tr><td>1</td><td>Subject Company Information</td><td>Stage 1</td><td>Entity identification: name, address, ticker, CUSIP</td></tr>
+    <tr><td>2</td><td>Identity and Background of Filing Person</td><td>Stage 1</td><td>Target&#8217;s identity and filing capacity</td></tr>
+    <tr><td>3</td><td>Past Contacts, Transactions, Negotiations &#38; Agreements</td><td>Stage 2</td><td>Chronological narrative; prior transactions between target and bidder</td></tr>
+    <tr><td>4</td><td>The Solicitation or Recommendation</td><td>Stage 4 + Freeze</td><td>Board recommendation, reasons, factors. Requires Board Deliberation Freeze.</td></tr>
+    <tr><td>5</td><td>Persons/Assets Retained, Employed, Compensated or Used</td><td>Stage 5</td><td>Financial advisor engagement terms, other retained persons</td></tr>
+    <tr><td>6</td><td>Interest in Securities of the Subject Company</td><td>Stage 5</td><td>Director &#38; officer equity holdings, recent transactions</td></tr>
+    <tr><td>7</td><td>Purposes of the Transaction and Plans or Proposals</td><td>Stage 6</td><td>Regulatory filings, strategic alternatives, post-transaction plans</td></tr>
+    <tr><td>8</td><td>Additional Information</td><td>Stages 5&#8211;6</td><td>Catch-all: 402(t) golden parachute, appraisal rights, employment arrangements, safe harbor</td></tr>
+    <tr><td>9</td><td>Exhibits</td><td>Stage 7</td><td>Fairness opinion, merger agreement, shareholder letter</td></tr>
+  </table>
+</div>
+
 <!-- PRE-PRODUCTION -->
-<section class="phase" id="pre"><div class="phase-head"><span class="phase-tag" style="background:#64748b">Pre-Prod</span><h2>Engagement & Mobilization</h2></div><p class="phase-sub">Entirely 🔴 — board-level engagement decisions, privilege establishment, 10-business-day clock starts.</p>
+<section class="phase" id="pre"><div class="phase-head"><span class="phase-tag" style="background:#64748b">Pre-Prod</span><h2>Engagement & Mobilization</h2></div><p class="phase-sub">Entirely &#128308; &#8212; board-level engagement decisions, privilege establishment. The 10-business-day clock starts when the tender offer is first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
-  A(["Tender offer received / TO filed"]):::red --> B["Engage outside legal counsel"]:::red
+  A(["Tender offer commenced (first published, sent or given to holders)"]):::red --> B["Engage outside legal counsel"]:::red
   B --> C["Engage financial advisor"]:::red
   C --> D{"Conflicts requiring Special Committee?"}:::redD
   D -- Yes --> E["Form Special Committee & retain independent counsel"]:::red
   D -- No --> F
   E --> F["Establish data room & privilege protocols"]:::red
-  F --> G["Calculate 10-business-day response deadline"]:::yel
+  F --> G["Calculate 10-business-day deadline from commencement date"]:::yel
   G --> H["Assign production roles & workstreams"]:::red
   H --> I["Establish document version control"]:::yel
   I --> J["Initial board briefing on TO terms & timeline"]:::red
@@ -151,21 +175,21 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 1 -->
-<section class="phase" id="s1"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 1</span><h2>Transaction Summary — Items 1–2</h2></div><p class="phase-sub">Mostly 🟢 — factual company information and transaction terms from locked data.</p>
+<section class="phase" id="s1"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 1</span><h2>Subject Company & Offer Overview</h2></div><p class="phase-sub">Covers Items 1&#8211;2 (entity identification) plus offer-context facts from locked Gate 1 data. Transaction terms included here for production sequencing; they feed into Items 3&#8211;4 for SEC disclosure purposes. See Item Coverage Map above.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
-  A["Subject company information"]:::grn --> B["Identity & background of filing person"]:::grn
+  A["Subject company information (Item 1)"]:::grn --> B["Identity & background of filing person (Item 2)"]:::grn
   B --> C["Transaction terms: price, structure, conditions"]:::yel
   C --> D["Financing structure & sources"]:::yel
   D --> E["Conditions to the offer"]:::yel
-  E --> F["Compile Items 1–2"]:::grnC
+  E --> F["Compile Stage 1 section"]:::grnC
   classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
   classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
   classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
 </pre></div></section>
 
 <!-- STAGE 2 -->
-<section class="phase" id="s2"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 2</span><h2>Background of the Transaction</h2></div><p class="phase-sub">The most sensitive section. Blow-by-blow narrative of how the deal unfolded. Heavy 🔴 for privilege review.</p>
+<section class="phase" id="s2"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 2</span><h2>Background of the Transaction</h2></div><p class="phase-sub">The most sensitive section. Covers Item 3 (past contacts, transactions, negotiations &#38; agreements per Reg M-A &#167;229.1005(d)). Heavy &#128308; for privilege review.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Collect board minutes & committee records"]:::red --> B["Interview directors & management"]:::red
@@ -200,7 +224,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 3 -->
-<section class="phase" id="s3"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 3</span><h2>Financial Analysis & Projections</h2></div><p class="phase-sub">Valuation summary drafting is heavily 🟢. Management projections (🔴) require board approval. Advisor reviews final summary.</p>
+<section class="phase" id="s3"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 3</span><h2>Financial Analysis & Projections</h2></div><p class="phase-sub">Valuation summary drafting is heavily &#128994;. Management projections (&#128308;) require board approval. Advisor reviews final summary.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Receive financial advisor's preliminary analysis"]:::red --> B["Draft comparable companies summary"]:::grn
@@ -237,7 +261,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- BOARD DELIBERATION FREEZE -->
-<section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">⚠ Freeze</span><h2>Board Deliberation — Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are 🔴 — purely human governance event. No recommendation drafting until the board votes and locks the position.</p>
+<section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">&#9888; Freeze</span><h2>Board Deliberation &#8212; Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are &#128308; &#8212; purely human governance event. No recommendation drafting until the board votes and locks the position.</p>
 <div class="chart-card purple"><pre class="mermaid">
 flowchart TD
   BD1["Present financial analysis to board / committee"]:::red --> BD2["Present strategic alternatives analysis"]:::red
@@ -253,7 +277,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 4 -->
-<section class="phase" id="s4"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 4</span><h2>Recommendation & Reasons</h2></div><p class="phase-sub">Mostly 🟡 — LLM drafts from board records, every sentence needs fiduciary compliance review.</p>
+<section class="phase" id="s4"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 4</span><h2>Recommendation & Reasons</h2></div><p class="phase-sub">Covers Item 4 &#8212; The Solicitation or Recommendation. Mostly &#128993; &#8212; LLM drafts from board records, every sentence needs fiduciary compliance review.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Draft recommendation statement"]:::yel --> B["Document positive factors considered"]:::yel
@@ -270,17 +294,17 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 5 -->
-<section class="phase" id="s5"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 5</span><h2>Conflicts, Interests & Governance</h2></div><p class="phase-sub">Mixed 🔴/🟡 — equity math is LLM-computable. Employment arrangements and director relationships require human disclosure.</p>
+<section class="phase" id="s5"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 5</span><h2>Conflicts, Interests & Governance</h2></div><p class="phase-sub">Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute 402(t) disclosure, employment arrangements, change-of-control provisions). Mixed &#128308;/&#128993;.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
-  A["Director & officer equity holdings"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
+  A["Director & officer equity holdings (Item 6)"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
   B --> C["Change-of-control / severance provisions"]:::red
-  C --> D["Golden parachute calculations (Item 402(t))"]:::yel
+  C --> D["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
   D --> E["Ongoing employment arrangements with bidder"]:::red
   E --> F["Director relationships with bidder"]:::red
   F --> G["Special Committee independence confirmation"]:::red
   G --> H["Quantify total payments per individual"]:::yel
-  H --> I["Draft Item 3 — interests & conflicts table"]:::yel
+  H --> I["Draft interests & conflicts tables (Items 5–6 / 8)"]:::yel
   I --> J["Legal review — completeness of disclosures"]:::red
   J --> K["Compile Conflicts & Interests section"]:::grnC
   classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
@@ -289,7 +313,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 6 -->
-<section class="phase" id="s6"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 6</span><h2>Legal, Regulatory & Shareholder Rights</h2></div><p class="phase-sub">Heavy 🔴 — regulatory filings, intent to tender, SEC compliance. Safe harbor language is 🟢.</p>
+<section class="phase" id="s6"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 6</span><h2>Legal, Regulatory & Shareholder Rights</h2></div><p class="phase-sub">Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor, additional info). Heavy &#128308; &#8212; regulatory filings, intent to tender, SEC compliance. Safe harbor is &#128994;.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Appraisal / dissent rights analysis"]:::yel --> B["Draft appraisal rights notice"]:::yel
@@ -307,7 +331,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- GATE 4 -->
-<section class="phase" id="g4"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 4</span><h2>SEC Compliance Lock</h2></div><p class="phase-sub">Every Schedule 14D-9 item addressed. Regulation 14D compliance confirmed. SEC Counsel provides prerequisite.</p>
+<section class="phase" id="g4"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 4</span><h2>SEC Compliance Lock</h2></div><p class="phase-sub">Every Schedule 14D-9 item addressed per the Item Coverage Map. Regulation 14D compliance confirmed. SEC Counsel provides prerequisite.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Schedule 14D-9 item checklist — all items addressed"]:::grn --> B["Regulation 14D-101 compliance verified"]:::red
@@ -323,7 +347,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 7 -->
-<section class="phase" id="s7"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 7</span><h2>Exhibits & Final Assembly</h2></div><p class="phase-sub">Exhibit attachment is 🔴. Cross-referencing and compilation are 🟢. EDGAR formatting is 🟡.</p>
+<section class="phase" id="s7"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 7</span><h2>Exhibits & Final Assembly</h2></div><p class="phase-sub">Covers Item 9 (exhibits). Exhibit attachment is &#128308;. Cross-referencing and compilation are &#128994;. EDGAR formatting is &#128993;.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Attach fairness opinion letter (Exhibit (a))"]:::red --> B["Attach or incorporate merger agreement"]:::red
@@ -341,7 +365,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- GATE 5 -->
-<section class="phase" id="g5"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 5</span><h2>Final Review & Filing Authorization</h2></div><p class="phase-sub">12 QC checks + 4-tier sign-off chain. Board authorizes filing. Attestations → Certification → Approval.</p>
+<section class="phase" id="g5"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 5</span><h2>Final Review & Filing Authorization</h2></div><p class="phase-sub">12 QC checks + 4-tier sign-off chain. Filing must occur within 10 business days of commencement (first published, sent or given). Attestations &#8594; Certification &#8594; Approval.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   Q1["All Schedule 14D-9 items addressed"]:::grn --> Q2["Financial figures consistent"]:::grn
@@ -353,7 +377,7 @@ flowchart TD
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel
-  Q10 --> Q11["Filing within 10-business-day deadline"]:::red
+  Q10 --> Q11["Filing within 10-business-day deadline from commencement"]:::red
   Q11 --> Q12["Board / committee authorizes filing"]:::red
   Q12 --> QP{"All checks pass?"}:::redD
   QP -- No --> Q1
@@ -369,7 +393,7 @@ flowchart TD
   classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
 </pre></div></section>
 
-<div class="footer">Schedule 14D-9 Production Workflow v1.0 · LLM Capability Map · Confidential</div>
+<div class="footer">Schedule 14D-9 Production Workflow v1.1 &#183; LLM Capability Map &#183; Confidential</div>
 </div>
 
 <script>
@@ -377,7 +401,6 @@ mermaid.initialize({theme:'dark',themeVariables:{primaryColor:'#1e1e2e',primaryT
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.08});
 document.querySelectorAll('.phase').forEach(el=>observer.observe(el));
 document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.sidebar').classList.remove('open')));
-
 </script>
 </body>
 </html>

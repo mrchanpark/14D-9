@@ -1,9 +1,9 @@
 # Schedule 14D-9 Production Workflow
 
-## Target's Solicitation / Recommendation Statement — LLM Capability Map v1.0
+## Target's Solicitation / Recommendation Statement — LLM Capability Map v1.1
 
 > **126 actionable steps** · **7 stages** · **5 validation gates** · **1 board deliberation freeze** · **9 SEC items**
-> Covers the full production lifecycle from tender offer receipt through EDGAR filing within the 10-business-day deadline.
+> Covers the full production lifecycle from tender offer commencement through EDGAR filing within the 10-business-day deadline (Rule 14e-2(a): 10 business days from when the offer is first published, sent or given to holders).
 
 ## LLM Capability Legend
 
@@ -25,21 +25,39 @@
 | **APPROVAL** | Board recommendation endorsed and authorized for filing | Board / Special Committee |
 | **PREREQUISITE** | SEC disclosure and regulatory requirements fulfilled | SEC Counsel |
 
+## Item Coverage Map — Schedule 14D-9 (Regulation 14D-101)
+
+> Items 1–9 per Regulation M-A §229.1000 et seq. as incorporated by Schedule 14D-9. This map shows where each SEC item is **primarily** addressed in the production workflow. Some items are touched by multiple stages; the primary stage is listed first.
+
+| Item | Title (Reg 14D-101 / Reg M-A) | Primary Stage | Notes |
+|:----:|------|:---:|-------|
+| **1** | Subject Company Information (§229.1000) | Stage 1 | Entity identification: name, address, ticker, CUSIP |
+| **2** | Identity and Background of Filing Person (§229.1001) | Stage 1 | Target's identity and filing capacity |
+| **3** | Past Contacts, Transactions, Negotiations and Agreements (§229.1005(d)) | Stage 2 | Chronological narrative of all contacts between target and bidder; prior transactions and agreements |
+| **4** | The Solicitation or Recommendation (§229.1012) | Stage 4 + Freeze | Board's recommendation (accept/reject/no opinion), reasons, factors considered. Requires Board Deliberation Freeze before drafting. |
+| **5** | Persons/Assets Retained, Employed, Compensated or Used (§229.1009) | Stage 5 | Financial advisor engagement terms, other retained persons |
+| **6** | Interest in Securities of the Subject Company (§229.1008) | Stage 5 | Director & officer equity holdings, recent transactions in target's securities |
+| **7** | Purposes of the Transaction and Plans or Proposals (§229.1006) | Stage 6 | Regulatory filings, strategic alternatives, plans for the company post-transaction |
+| **8** | Additional Information (§229.1011) | Stages 5–6 | Catch-all: golden parachute Item 402(t) disclosure, appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
+| **9** | Exhibits (§229.1016) | Stage 7 | Fairness opinion letter, merger agreement, shareholder letter, information statement |
+
+> **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
+
 ---
 
 ## Pre-Production: Engagement & Mobilization
 
-> *Entirely 🔴 — board-level engagement decisions, privilege establishment, timeline calculation. The 10-business-day clock starts when the TO is filed.*
+> *Entirely 🔴 — board-level engagement decisions, privilege establishment, timeline calculation. The 10-business-day clock starts when the tender offer is first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.*
 
 ```mermaid
 flowchart TD
-  A(["Tender offer received / TO filed"]):::red --> B["Engage outside legal counsel"]:::red
+  A(["Tender offer commenced (first published, sent or given to holders)"]):::red --> B["Engage outside legal counsel"]:::red
   B --> C["Engage financial advisor"]:::red
   C --> D{"Conflicts requiring Special Committee?"}:::redD
   D -- Yes --> E["Form Special Committee & retain independent counsel"]:::red
   D -- No --> F
   E --> F["Establish data room & privilege protocols"]:::red
-  F --> G["Calculate 10-business-day response deadline"]:::yel
+  F --> G["Calculate 10-business-day deadline from commencement date"]:::yel
   G --> H["Assign production roles & workstreams"]:::red
   H --> I["Establish document version control"]:::yel
   I --> J["Initial board briefing on TO terms & timeline"]:::red
@@ -67,17 +85,17 @@ flowchart TD
   classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
 ```
 
-## Stage 1: Transaction Summary — Items 1–2
+## Stage 1: Subject Company & Offer Overview
 
-> *Mostly 🟢 — factual company information and transaction terms pulled from locked data. LLM compiles from verified inputs.*
+> *Covers Items 1–2 (entity identification) plus offer-context facts from locked Gate 1 data. Mostly 🟢 — factual company information compiled from public data and verified inputs. Transaction terms included here for production sequencing, though they feed into Items 3–4 for SEC disclosure purposes.*
 
 ```mermaid
 flowchart TD
-  A["Subject company information"]:::grn --> B["Identity & background of filing person"]:::grn
+  A["Subject company information (Item 1)"]:::grn --> B["Identity & background of filing person (Item 2)"]:::grn
   B --> C["Transaction terms: price, structure, conditions"]:::yel
   C --> D["Financing structure & sources"]:::yel
   D --> E["Conditions to the offer"]:::yel
-  E --> F["Compile Items 1–2"]:::grnC
+  E --> F["Compile Stage 1 section"]:::grnC
   classDef yel fill:#fef3c7,stroke:#d97706,color:#78350f
   classDef grn fill:#dcfce7,stroke:#16a34a,color:#14532d
   classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
@@ -85,7 +103,7 @@ flowchart TD
 
 ## Stage 2: Background of the Transaction
 
-> *The most sensitive section. Blow-by-blow narrative of how the deal unfolded. Heavy 🔴 — board minutes, director interviews, privilege review. LLM can draft narrative from records but every paragraph needs legal review.*
+> *The most sensitive section. Blow-by-blow narrative of how the deal unfolded — covers Item 3 (past contacts, transactions, negotiations and agreements per Reg M-A §229.1005(d)) and provides the factual foundation for the Item 4 recommendation. Heavy 🔴 — board minutes, director interviews, privilege review. LLM can draft narrative from records but every paragraph needs legal review.*
 
 ```mermaid
 flowchart TD
@@ -183,7 +201,7 @@ flowchart TD
 
 ## Stage 4: Recommendation & Reasons
 
-> *Mostly 🟡 — LLM drafts from board deliberation records, but every sentence needs legal review for fiduciary compliance. Dissenting views (🔴) are board-only. Revlon/Unocal review is outside counsel's domain.*
+> *Covers Item 4 — The Solicitation or Recommendation (Reg M-A §229.1012). Mostly 🟡 — LLM drafts from board deliberation records, but every sentence needs legal review for fiduciary compliance. Dissenting views (🔴) are board-only. Revlon/Unocal review is outside counsel's domain.*
 
 ```mermaid
 flowchart TD
@@ -202,18 +220,18 @@ flowchart TD
 
 ## Stage 5: Conflicts, Interests & Governance
 
-> *Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. Legal reviews completeness.*
+> *Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute 402(t) disclosure, employment arrangements, change-of-control provisions). Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. The Item 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically placed under Item 8.*
 
 ```mermaid
 flowchart TD
-  A["Director & officer equity holdings"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
+  A["Director & officer equity holdings (Item 6)"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
   B --> C["Change-of-control / severance provisions"]:::red
-  C --> D["Golden parachute calculations (Item 402(t))"]:::yel
+  C --> D["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
   D --> E["Ongoing employment / consulting arrangements with bidder"]:::red
   E --> F["Director relationships or arrangements with bidder"]:::red
   F --> G["Special Committee independence confirmation"]:::red
   G --> H["Quantify total payments per individual"]:::yel
-  H --> I["Draft Item 3 — interests & conflicts table"]:::yel
+  H --> I["Draft interests & conflicts tables (Items 5–6 / 8)"]:::yel
   I --> J["Legal review — completeness of conflict disclosures"]:::red
   J --> K["Compile Conflicts & Interests section"]:::grnC
   classDef red fill:#fecaca,stroke:#dc2626,color:#7f1d1d
@@ -223,7 +241,7 @@ flowchart TD
 
 ## Stage 6: Legal, Regulatory & Shareholder Rights
 
-> *Heavy 🔴 — regulatory filings, intent to tender, and SEC compliance are counsel-driven. Appraisal rights drafting (🟡) uses state-law boilerplate but needs jurisdiction-specific review. Safe harbor language is 🟢.*
+> *Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor language, additional information), and supporting content for Items throughout. Heavy 🔴 — regulatory filings, intent to tender, and SEC compliance are counsel-driven. Appraisal rights drafting (🟡) uses state-law boilerplate but needs jurisdiction-specific review. Safe harbor language is 🟢.*
 
 ```mermaid
 flowchart TD
@@ -243,7 +261,7 @@ flowchart TD
 
 ## 🚧 Gate 4: SEC Compliance Lock
 
-> *Regulatory checkpoint. Every Schedule 14D-9 item addressed, Regulation 14D compliance confirmed, appraisal rights properly noticed. SEC Counsel provides governance prerequisite.*
+> *Regulatory checkpoint. Every Schedule 14D-9 item addressed per the Item Coverage Map, Regulation 14D compliance confirmed, appraisal rights properly noticed. SEC Counsel provides governance prerequisite.*
 
 ```mermaid
 flowchart TD
@@ -261,7 +279,7 @@ flowchart TD
 
 ## Stage 7: Exhibits & Final Assembly
 
-> *Mixed — exhibit attachment is 🔴 (legal instruments). Shareholder letter drafting is 🟡. Cross-referencing, compilation, and proofing are 🟢. EDGAR formatting is 🟡.*
+> *Covers Item 9 (exhibits). Mixed — exhibit attachment is 🔴 (legal instruments). Shareholder letter drafting is 🟡. Cross-referencing, compilation, and proofing are 🟢. EDGAR formatting is 🟡.*
 
 ```mermaid
 flowchart TD
@@ -281,7 +299,7 @@ flowchart TD
 
 ## 🚧 Gate 5: Final Review & Filing Authorization
 
-> *12 QC checks followed by 4-tier sign-off chain. Board authorizes filing as final step before EDGAR submission. Sign-off order: attestations → certification → approval.*
+> *12 QC checks followed by 4-tier sign-off chain. Board authorizes filing as final step before EDGAR submission. Filing must occur within 10 business days of commencement (first published, sent or given to holders). Sign-off order: attestations → certification → approval.*
 
 ```mermaid
 flowchart TD
@@ -294,7 +312,7 @@ flowchart TD
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel
-  Q10 --> Q11["Filing within 10-business-day deadline confirmed"]:::red
+  Q10 --> Q11["Filing within 10-business-day deadline from commencement"]:::red
   Q11 --> Q12["Board / committee authorizes filing"]:::red
   Q12 --> QP{"All checks pass?"}:::redD
   QP -- No --> Q1
@@ -327,12 +345,20 @@ flowchart TD
 | **Primary drafter** | Memo Owner (internal team) | Outside Legal Counsel |
 | **Ultimate authority** | Deal Sponsor | Board of Directors / Special Committee |
 | **Freeze checkpoint** | Decision-Rights Freeze (lock ask before valuation) | Board Deliberation (lock recommendation before drafting reasons) |
-| **Time pressure** | Weeks to months | 10 business days from TO filing |
+| **Time pressure** | Weeks to months | 10 business days from commencement |
 | **Regulatory overlay** | Firm governance only | SEC Regulation 14D, state appraisal law, fiduciary duty standards |
 | **Privilege concern** | Confidentiality tiers | Attorney-client privilege — inadvertent waiver risk |
 | **LLM-heavy areas** | Market research, comps, scenario modeling | Valuation summaries, financial tables, boilerplate legal language |
 | **LLM-restricted areas** | Sign-offs, deal terms, personnel | Board decisions, privilege review, fiduciary analysis, conflict disclosures |
 | **Red/Yellow/Green split** | 62 / 66 / 56 (34% / 36% / 30%) | 66 / 34 / 26 (52% / 27% / 21%) |
+
+## v1.1 Change Log
+
+| # | Issue | Fix |
+|---|-------|-----|
+| 1 | Trigger for 10-business-day deadline was "TO filed" | Changed to "commencement (first published, sent or given to holders)" per Rule 14e-2(a) and Rule 14d-2 |
+| 2 | Stage 1 labeled "Items 1–2" but included offer terms; Stage 5 labeled "Item 3" for conflicts | Stage 1 renamed "Subject Company & Offer Overview"; Item labels on individual nodes clarify Items 1–2 are identity only. Stage 5 conflicts table now references Items 5–6 / 8. Added Item Coverage Map. |
+| 3 | Golden parachute 402(t) lacked proper SEC context | Node relabeled "14D-9 Item 402(t) disclosure"; Item Coverage Map places it under Item 8 per SEC rules guidance |
 
 ## Usage
 
@@ -342,4 +368,4 @@ flowchart TD
 
 ---
 
-*Schedule 14D-9 Production Workflow v1.0 | LLM Capability Map | Confidential*
+*Schedule 14D-9 Production Workflow v1.1 | LLM Capability Map | Confidential*
