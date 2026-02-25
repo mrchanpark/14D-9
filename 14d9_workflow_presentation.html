@@ -132,17 +132,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
     <tr><td>4</td><td>The Solicitation or Recommendation</td><td>Stage 4 + Freeze</td><td>Board recommendation, reasons, factors. Requires Board Deliberation Freeze.</td></tr>
     <tr><td>5</td><td>Persons/Assets Retained, Employed, Compensated or Used</td><td>Stage 5</td><td>Financial advisor engagement terms, other retained persons</td></tr>
     <tr><td>6</td><td>Interest in Securities of the Subject Company</td><td>Stage 5</td><td>Director &#38; officer equity holdings, recent transactions</td></tr>
-    <tr><td>7</td><td>Purposes of the Transaction and Plans or Proposals</td><td>Stage 6</td><td>Plans/proposals regarding the subject company: merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy</td></tr>
-    <tr><td>8</td><td>Additional Information</td><td>Stages 5&#8211;6</td><td>Catch-all: golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, safe harbor</td></tr>
+    <tr><td>7</td><td>Purposes of the Transaction and Plans or Proposals</td><td>Stage 6</td><td>Plans/proposals regarding the subject company (if any): merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy</td></tr>
+    <tr><td>8</td><td>Additional Information</td><td>Stages 5&#8211;6</td><td>Examples (as applicable): golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, safe harbor</td></tr>
     <tr><td>9</td><td>Exhibits</td><td>Stage 7</td><td>Fairness opinion, merger agreement, shareholder letter</td></tr>
   </table>
 </div>
 
 <!-- PRE-PRODUCTION -->
-<section class="phase" id="pre"><div class="phase-head"><span class="phase-tag" style="background:#64748b">Pre-Prod</span><h2>Engagement & Mobilization</h2></div><p class="phase-sub">Entirely &#128308; &#8212; board-level engagement decisions, privilege establishment. The 10-business-day clock starts when the tender offer is first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.</p>
+<section class="phase" id="pre"><div class="phase-head"><span class="phase-tag" style="background:#64748b">Pre-Prod</span><h2>Engagement & Mobilization</h2></div><p class="phase-sub">Entirely &#128308; &#8212; board-level engagement decisions, privilege establishment. The 10-business-day clock starts when the means to tender are first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
-  A(["Tender offer commenced (first published, sent or given to holders)"]):::red --> B["Engage outside legal counsel"]:::red
+  A(["Tender offer commenced (means to tender first published/sent/given)"]):::red --> B["Engage outside legal counsel"]:::red
   B --> C["Engage financial advisor"]:::red
   C --> D{"Conflicts requiring Special Committee?"}:::redD
   D -- Yes --> E["Form Special Committee & retain independent counsel"]:::red
@@ -313,13 +313,13 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 6 -->
-<section class="phase" id="s6"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 6</span><h2>Legal, Regulatory & Shareholder Rights</h2></div><p class="phase-sub">Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor, additional info). Heavy &#128308; &#8212; regulatory filings, intent to tender, SEC compliance. Safe harbor is &#128994;.</p>
+<section class="phase" id="s6"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 6</span><h2>Legal, Regulatory & Shareholder Rights</h2></div><p class="phase-sub">Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor, additional info). Heavy &#128308; &#8212; regulatory filings, intent to tender, SEC compliance. Safe harbor is &#128993; &#8212; LLM can draft boilerplate but PSLRA scope requires counsel review.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Appraisal / dissent rights analysis"]:::yel --> B["Draft appraisal rights notice"]:::yel
   B --> C["Identify regulatory approvals (HSR, CFIUS)"]:::red
   C --> D["Status of regulatory filings & timeline"]:::red
-  D --> E["Forward-looking statements safe harbor"]:::grn
+  D --> E["Forward-looking statements safe harbor"]:::yel
   E --> F["Additional company information / incorporation by reference"]:::grn
   F --> G["Intent to tender disclosures"]:::red
   G --> H["SEC compliance review — Regulation 14D"]:::red
@@ -365,7 +365,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- GATE 5 -->
-<section class="phase" id="g5"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 5</span><h2>Final Review & Filing Authorization</h2></div><p class="phase-sub">12 QC checks + 4-tier sign-off chain. Filing must occur within 10 business days of commencement (first published, sent or given). Attestations &#8594; Certification &#8594; Approval.</p>
+<section class="phase" id="g5"><div class="phase-head"><span class="phase-tag" style="background:#c9a84c;color:#1a1200">Gate 5</span><h2>Final Review & Filing Authorization</h2></div><p class="phase-sub">12 QC checks + 4-tier sign-off chain. Filing must occur within 10 business days of commencement (means to tender first published/sent/given). Attestations &#8594; Certification &#8594; Approval.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   Q1["All Schedule 14D-9 items addressed"]:::grn --> Q2["Financial figures consistent"]:::grn
@@ -373,7 +373,7 @@ flowchart TD
   Q3 --> Q4["Fairness opinion summary approved by advisor"]:::red
   Q4 --> Q5["Golden parachute calculations verified"]:::yel
   Q5 --> Q6["Appraisal rights properly noticed"]:::red
-  Q6 --> Q7["Forward-looking statements disclaimered"]:::grn
+  Q6 --> Q7["Forward-looking statements disclaimered"]:::yel
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel

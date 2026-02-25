@@ -3,7 +3,7 @@
 ## Target's Solicitation / Recommendation Statement — LLM Capability Map v1.1
 
 > **126 actionable steps** · **7 stages** · **5 validation gates** · **1 board deliberation freeze** · **9 SEC items**
-> Covers the full production lifecycle from tender offer commencement through EDGAR filing within the 10-business-day deadline (Rule 14e-2(a): 10 business days from when the offer is first published, sent or given to holders).
+> Covers the full production lifecycle from tender offer commencement through EDGAR filing within the 10-business-day deadline (Rule 14e-2(a): 10 business days from when the means to tender are first published, sent or given to holders per Rule 14d-2).
 
 ## LLM Capability Legend
 
@@ -37,8 +37,8 @@
 | **4** | The Solicitation or Recommendation (§229.1012) | Stage 4 + Freeze | Board's recommendation (accept/reject/no opinion), reasons, factors considered. Requires Board Deliberation Freeze before drafting. |
 | **5** | Persons/Assets Retained, Employed, Compensated or Used (§229.1009) | Stage 5 | Financial advisor engagement terms, other retained persons |
 | **6** | Interest in Securities of the Subject Company (§229.1008) | Stage 5 | Director & officer equity holdings, recent transactions in target's securities |
-| **7** | Purposes of the Transaction and Plans or Proposals (§229.1006) | Stage 6 | Plans/proposals regarding the subject company: merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy |
-| **8** | Additional Information (§229.1011) | Stages 5–6 | Catch-all: golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
+| **7** | Purposes of the Transaction and Plans or Proposals (§229.1006) | Stage 6 | Plans/proposals regarding the subject company (if any): merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy |
+| **8** | Additional Information (§229.1011) | Stages 5–6 | Examples (as applicable): golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
 | **9** | Exhibits (§229.1016) | Stage 7 | Fairness opinion letter, merger agreement, shareholder letter, information statement |
 
 > **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute disclosure required by Reg S-K Item 402(t) is provided in the 14D-9 per SEC rules guidance and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
@@ -47,11 +47,11 @@
 
 ## Pre-Production: Engagement & Mobilization
 
-> *Entirely 🔴 — board-level engagement decisions, privilege establishment, timeline calculation. The 10-business-day clock starts when the tender offer is first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.*
+> *Entirely 🔴 — board-level engagement decisions, privilege establishment, timeline calculation. The 10-business-day clock starts when the means to tender are first published, sent or given to holders (commencement under Rule 14d-2), which may coincide with but is not legally identical to the Schedule TO filing date.*
 
 ```mermaid
 flowchart TD
-  A(["Tender offer commenced (first published, sent or given to holders)"]):::red --> B["Engage outside legal counsel"]:::red
+  A(["Tender offer commenced (means to tender first published/sent/given)"]):::red --> B["Engage outside legal counsel"]:::red
   B --> C["Engage financial advisor"]:::red
   C --> D{"Conflicts requiring Special Committee?"}:::redD
   D -- Yes --> E["Form Special Committee & retain independent counsel"]:::red
@@ -241,14 +241,14 @@ flowchart TD
 
 ## Stage 6: Legal, Regulatory & Shareholder Rights
 
-> *Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor language, additional information), and supporting content for Items throughout. Heavy 🔴 — regulatory filings, intent to tender, and SEC compliance are counsel-driven. Appraisal rights drafting (🟡) uses state-law boilerplate but needs jurisdiction-specific review. Safe harbor language is 🟢.*
+> *Covers Item 7 (purposes/plans), portions of Item 8 (appraisal rights, safe harbor language, additional information), and supporting content for Items throughout. Heavy 🔴 — regulatory filings, intent to tender, and SEC compliance are counsel-driven. Appraisal rights drafting (🟡) uses state-law boilerplate but needs jurisdiction-specific review. Safe harbor language is 🟡 — LLM can draft boilerplate but PSLRA scope and issuer-specific cautionary language require counsel review.*
 
 ```mermaid
 flowchart TD
   A["Appraisal / dissent rights analysis"]:::yel --> B["Draft appraisal rights notice language"]:::yel
   B --> C["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
   C --> D["Status of regulatory filings & expected timeline"]:::red
-  D --> E["Forward-looking statements safe harbor language"]:::grn
+  D --> E["Forward-looking statements safe harbor language"]:::yel
   E --> F["Additional company information / incorporation by reference"]:::grn
   F --> G["Intent to tender disclosures (directors & officers)"]:::red
   G --> H["SEC compliance review — Regulation 14D"]:::red
@@ -299,7 +299,7 @@ flowchart TD
 
 ## 🚧 Gate 5: Final Review & Filing Authorization
 
-> *12 QC checks followed by 4-tier sign-off chain. Board authorizes filing as final step before EDGAR submission. Filing must occur within 10 business days of commencement (first published, sent or given to holders). Sign-off order: attestations → certification → approval.*
+> *12 QC checks followed by 4-tier sign-off chain. Board authorizes filing as final step before EDGAR submission. Filing must occur within 10 business days of commencement (means to tender first published/sent/given). Sign-off order: attestations → certification → approval.*
 
 ```mermaid
 flowchart TD
@@ -308,7 +308,7 @@ flowchart TD
   Q3 --> Q4["Fairness opinion summary approved by advisor"]:::red
   Q4 --> Q5["Golden parachute calculations verified"]:::yel
   Q5 --> Q6["Appraisal rights properly noticed"]:::red
-  Q6 --> Q7["Forward-looking statements disclaimered"]:::grn
+  Q6 --> Q7["Forward-looking statements disclaimered"]:::yel
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel
@@ -335,8 +335,8 @@ flowchart TD
 | Category | Approx. Steps | Examples |
 |----------|:---:|---------|
 | 🔴 **LLM Cannot Do** | ~66 | Board deliberations, privilege review, sign-offs, fairness opinion, management interviews, director conflicts, SEC compliance, regulatory filings, fiduciary review |
-| 🟡 **LLM Needs Human Oversight** | ~34 | Background narrative drafting, projection tables, golden parachute calculations, recommendation factors, appraisal rights language, EDGAR formatting |
-| 🟢 **LLM Can Do** | ~26 | Comparable company summaries, precedent transactions, DCF formatting, cross-reference checks, safe harbor language, item checklists, exhibit compilation, proofreading |
+| 🟡 **LLM Needs Human Oversight** | ~36 | Background narrative drafting, projection tables, golden parachute calculations, recommendation factors, appraisal rights language, safe harbor language, EDGAR formatting |
+| 🟢 **LLM Can Do** | ~24 | Comparable company summaries, precedent transactions, DCF formatting, cross-reference checks, item checklists, exhibit compilation, proofreading |
 
 ## Key Differences from IC Memo Workflow
 
@@ -356,13 +356,17 @@ flowchart TD
 
 | # | Issue | Fix |
 |---|-------|-----|
-| 1 | Trigger for 10-business-day deadline was "TO filed" | Changed to "commencement (first published, sent or given to holders)" per Rule 14e-2(a) and Rule 14d-2 |
+| 1 | Trigger for 10-business-day deadline was "TO filed" | Changed to "commencement (means to tender first published/sent/given)" per Rule 14e-2(a) and Rule 14d-2 |
 | 2 | Stage 1 labeled "Items 1–2" but included offer terms; Stage 5 labeled "Item 3" for conflicts | Stage 1 renamed "Subject Company & Offer Overview"; Item labels on individual nodes clarify Items 1–2 are identity only. Stage 5 conflicts table now references Items 5–6 / 8. Added Item Coverage Map. |
 | 3 | Golden parachute 402(t) lacked proper SEC context | Node relabeled; Item Coverage Map places under Item 8 per SEC rules guidance |
 | 4 | Item 7 description said "Regulatory filings, strategic alternatives" | Corrected to purposes/plans/proposals per Reg M-A Item 1006(d): merger, delisting, asset sales, board changes, dividend policy |
 | 5 | Stage 6 node "Information about the subject company" duplicated Item 1 | Renamed "Additional company information / incorporation by reference" to clarify Item 8 catch-all role |
 | 6 | 402(t) node framed as "14D-9 Item" | Corrected to "Reg S-K Item 402(t), as applicable" — 402(t) is Regulation S-K, not a Schedule 14D-9 item |
 | 7 | Board Deliberation Freeze imposed hard ban on drafting | Softened to allow parallel drafting; ban applies to finalization/circulation of Item 4 language until board locks position |
+| 8 | Commencement parenthetical lacked "means to tender" precision | Tightened to "means to tender first published/sent/given" per Rule 14d-2 |
+| 9 | Item 8 notes listed disclosures as mandatory checklist | Changed to "Examples (as applicable)" — not every 14D-9 includes each Item 8 disclosure |
+| 10 | Item 7 notes implied plans/proposals must exist | Added "(if any)" qualifier — correct disclosure may be that no plans exist beyond what's described |
+| 11 | Forward-looking statements safe harbor marked 🟢 (LLM Can Do) | Reclassified 🟡 — PSLRA scope, issuer-specific cautionary language, and tender offer exclusions require counsel review |
 
 ## Usage
 

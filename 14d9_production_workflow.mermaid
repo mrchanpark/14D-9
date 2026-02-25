@@ -19,7 +19,7 @@ classDef grnC fill:#16a34a,stroke:#15803d,color:#fff,font-weight:700
 %% not necessarily when the Schedule TO is filed.
 %% ══════════════════════════════════════════════════
 subgraph PRE["Pre-Production: Engagement & Mobilization"]
-  P01(["Tender offer commenced (first published, sent or given to holders)"]):::red
+  P01(["Tender offer commenced (means to tender first published/sent/given)"]):::red
   P01 --> P02["Engage outside legal counsel"]:::red
   P02 --> P03["Engage financial advisor"]:::red
   P03 --> P04{"Conflicts requiring Special Committee?"}:::redD
@@ -183,7 +183,7 @@ subgraph S6["Stage 6: Legal, Regulatory & Shareholder Rights"]
   S6a --> S6b["Draft appraisal rights notice language"]:::yel
   S6b --> S6c["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
   S6c --> S6d["Status of regulatory filings & expected timeline"]:::red
-  S6d --> S6e["Forward-looking statements safe harbor language"]:::grn
+  S6d --> S6e["Forward-looking statements safe harbor language"]:::yel
   S6e --> S6f["Additional company information / incorporation by reference"]:::grn
   S6f --> S6g["Intent to tender disclosures (directors & officers)"]:::red
   S6g --> S6h["SEC compliance review — Regulation 14D"]:::red
@@ -221,7 +221,7 @@ end
 %% ══════════════════════════════════════════════════
 %% GATE 5: FINAL REVIEW & FILING AUTHORIZATION
 %% Filing must occur within 10 business days of
-%% commencement (first published, sent or given).
+%% commencement (means to tender first published/sent/given).
 %% ══════════════════════════════════════════════════
 subgraph G5["🚧 Gate 5: Final Review & Filing Authorization"]
   Q1["All Schedule 14D-9 items addressed"]:::grn
@@ -230,7 +230,7 @@ subgraph G5["🚧 Gate 5: Final Review & Filing Authorization"]
   Q3 --> Q4["Fairness opinion summary approved by advisor"]:::red
   Q4 --> Q5["Golden parachute calculations verified"]:::yel
   Q5 --> Q6["Appraisal rights properly noticed"]:::red
-  Q6 --> Q7["Forward-looking statements disclaimered"]:::grn
+  Q6 --> Q7["Forward-looking statements disclaimered"]:::yel
   Q7 --> Q8["Privilege review — no inadvertent disclosure"]:::red
   Q8 --> Q9["Exhibit list complete & attached"]:::grn
   Q9 --> Q10["EDGAR formatting verified"]:::yel
