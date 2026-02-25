@@ -41,7 +41,7 @@
 | **8** | Additional Information (§229.1011) | Stages 5–6 | Examples (as applicable): golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
 | **9** | Exhibits (§229.1016) | Stage 7 | Fairness opinion letter, merger agreement, shareholder letter, information statement |
 
-> **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute disclosure required by Reg S-K Item 402(t) is provided in the 14D-9 per SEC rules guidance and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
+> **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute disclosure required by Reg S-K Item 402(t) is provided in the 14D-9 per SEC rules guidance (see SEC Release No. 34-63768) and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
 
 ---
 
@@ -220,7 +220,7 @@ flowchart TD
 
 ## Stage 5: Conflicts, Interests & Governance
 
-> *Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute disclosure per Reg S-K Item 402(t), employment arrangements, change-of-control provisions). Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. The Reg S-K Item 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically placed under Item 8.*
+> *Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute disclosure per Reg S-K Item 402(t), employment arrangements, change-of-control provisions). Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. The Reg S-K Item 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance (Release No. 34-63768) and is typically placed under Item 8.*
 
 ```mermaid
 flowchart TD
@@ -249,7 +249,7 @@ flowchart TD
   B --> C["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
   C --> D["Status of regulatory filings & expected timeline"]:::red
   D --> E["Forward-looking statements safe harbor language"]:::yel
-  E --> F["Additional company information / incorporation by reference"]:::grn
+  E --> F["Additional company information / incorporation by reference"]:::yel
   F --> G["Intent to tender disclosures (directors & officers)"]:::red
   G --> H["SEC compliance review — Regulation 14D"]:::red
   H --> I["Compile Legal & Regulatory sections"]:::grnC
@@ -335,8 +335,8 @@ flowchart TD
 | Category | Approx. Steps | Examples |
 |----------|:---:|---------|
 | 🔴 **LLM Cannot Do** | ~66 | Board deliberations, privilege review, sign-offs, fairness opinion, management interviews, director conflicts, SEC compliance, regulatory filings, fiduciary review |
-| 🟡 **LLM Needs Human Oversight** | ~36 | Background narrative drafting, projection tables, golden parachute calculations, recommendation factors, appraisal rights language, safe harbor language, EDGAR formatting |
-| 🟢 **LLM Can Do** | ~24 | Comparable company summaries, precedent transactions, DCF formatting, cross-reference checks, item checklists, exhibit compilation, proofreading |
+| 🟡 **LLM Needs Human Oversight** | ~37 | Background narrative drafting, projection tables, golden parachute calculations, recommendation factors, appraisal rights language, safe harbor language, incorporation by reference, EDGAR formatting |
+| 🟢 **LLM Can Do** | ~23 | Comparable company summaries, precedent transactions, DCF formatting, cross-reference checks, item checklists, exhibit compilation, proofreading |
 
 ## Key Differences from IC Memo Workflow
 
@@ -367,6 +367,11 @@ flowchart TD
 | 9 | Item 8 notes listed disclosures as mandatory checklist | Changed to "Examples (as applicable)" — not every 14D-9 includes each Item 8 disclosure |
 | 10 | Item 7 notes implied plans/proposals must exist | Added "(if any)" qualifier — correct disclosure may be that no plans exist beyond what's described |
 | 11 | Forward-looking statements safe harbor marked 🟢 (LLM Can Do) | Reclassified 🟡 — PSLRA scope, issuer-specific cautionary language, and tender offer exclusions require counsel review |
+| 12 | Pre-Prod LLM tag referenced "filing date" for deadline calculation | Changed to "commencement date (means to tender first published/sent/given)" — filing date ≠ legal trigger |
+| 13 | Stage 5 LLM tag referenced "Item 3 conflicts table" | Corrected to "interests & conflicts tables (Items 5–6 / portions of Item 8)" — Item 3 is Stage 2 background |
+| 14 | Word doc headline lacked Rule 14e-2(a) citation | Added "(Rule 14e-2(a))" to deadline headline for self-documenting anchor |
+| 15 | Item 8 note lacked SEC adopting release citation | Added "Release No. 34-63768" parenthetical to 402(t) references |
+| 16 | Step 90 "Additional company information / incorporation by reference" marked 🟢 | Reclassified 🟡 — incorporation mechanics and scope are counsel-sensitive |
 
 ## Usage
 
