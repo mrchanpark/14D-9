@@ -37,11 +37,11 @@
 | **4** | The Solicitation or Recommendation (§229.1012) | Stage 4 + Freeze | Board's recommendation (accept/reject/no opinion), reasons, factors considered. Requires Board Deliberation Freeze before drafting. |
 | **5** | Persons/Assets Retained, Employed, Compensated or Used (§229.1009) | Stage 5 | Financial advisor engagement terms, other retained persons |
 | **6** | Interest in Securities of the Subject Company (§229.1008) | Stage 5 | Director & officer equity holdings, recent transactions in target's securities |
-| **7** | Purposes of the Transaction and Plans or Proposals (§229.1006) | Stage 6 | Regulatory filings, strategic alternatives, plans for the company post-transaction |
-| **8** | Additional Information (§229.1011) | Stages 5–6 | Catch-all: golden parachute Item 402(t) disclosure, appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
+| **7** | Purposes of the Transaction and Plans or Proposals (§229.1006) | Stage 6 | Plans/proposals regarding the subject company: merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy |
+| **8** | Additional Information (§229.1011) | Stages 5–6 | Catch-all: golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, change-of-control provisions, forward-looking statements safe harbor |
 | **9** | Exhibits (§229.1016) | Stage 7 | Fairness opinion letter, merger agreement, shareholder letter, information statement |
 
-> **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
+> **Note on Item 8:** This is the broadest item and draws content from multiple stages. The golden parachute disclosure required by Reg S-K Item 402(t) is provided in the 14D-9 per SEC rules guidance and is typically included under Item 8. Employment arrangements and change-of-control provisions (Stage 5) also feed into Item 8. Appraisal rights and safe harbor language (Stage 6) are likewise Item 8 content.
 
 ---
 
@@ -183,7 +183,7 @@ flowchart TD
 
 ## ⚠ Board Deliberation — Required Before Recommendation
 
-> *New in this workflow. The board must formally deliberate and vote before the recommendation and reasons sections can be drafted. All 7 nodes are 🔴 — this is a purely human governance event. No drafting of the recommendation may begin until this checkpoint clears.*
+> *New in this workflow. The board must formally deliberate and vote before the Item 4 reasons language can be finalized or circulated. All 7 nodes are 🔴 — this is a purely human governance event. Counsel may prepare alternative drafts in parallel, but no finalization or circulation of Item 4 language until the board locks its position.*
 
 ```mermaid
 flowchart TD
@@ -220,13 +220,13 @@ flowchart TD
 
 ## Stage 5: Conflicts, Interests & Governance
 
-> *Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute 402(t) disclosure, employment arrangements, change-of-control provisions). Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. The Item 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically placed under Item 8.*
+> *Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute disclosure per Reg S-K Item 402(t), employment arrangements, change-of-control provisions). Mixed 🔴/🟡 — equity holdings and golden parachute math are LLM-computable from data. Change-of-control terms, employment arrangements, and director relationships with the bidder require human disclosure. The Reg S-K Item 402(t) tabular disclosure is provided in the 14D-9 per SEC rules guidance and is typically placed under Item 8.*
 
 ```mermaid
 flowchart TD
   A["Director & officer equity holdings (Item 6)"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
   B --> C["Change-of-control / severance provisions"]:::red
-  C --> D["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
+  C --> D["Golden parachute disclosure (Reg S-K Item 402(t), as applicable)"]:::yel
   D --> E["Ongoing employment / consulting arrangements with bidder"]:::red
   E --> F["Director relationships or arrangements with bidder"]:::red
   F --> G["Special Committee independence confirmation"]:::red
@@ -249,7 +249,7 @@ flowchart TD
   B --> C["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
   C --> D["Status of regulatory filings & expected timeline"]:::red
   D --> E["Forward-looking statements safe harbor language"]:::grn
-  E --> F["Information about the subject company"]:::grn
+  E --> F["Additional company information / incorporation by reference"]:::grn
   F --> G["Intent to tender disclosures (directors & officers)"]:::red
   G --> H["SEC compliance review — Regulation 14D"]:::red
   H --> I["Compile Legal & Regulatory sections"]:::grnC
@@ -358,7 +358,11 @@ flowchart TD
 |---|-------|-----|
 | 1 | Trigger for 10-business-day deadline was "TO filed" | Changed to "commencement (first published, sent or given to holders)" per Rule 14e-2(a) and Rule 14d-2 |
 | 2 | Stage 1 labeled "Items 1–2" but included offer terms; Stage 5 labeled "Item 3" for conflicts | Stage 1 renamed "Subject Company & Offer Overview"; Item labels on individual nodes clarify Items 1–2 are identity only. Stage 5 conflicts table now references Items 5–6 / 8. Added Item Coverage Map. |
-| 3 | Golden parachute 402(t) lacked proper SEC context | Node relabeled "14D-9 Item 402(t) disclosure"; Item Coverage Map places it under Item 8 per SEC rules guidance |
+| 3 | Golden parachute 402(t) lacked proper SEC context | Node relabeled; Item Coverage Map places under Item 8 per SEC rules guidance |
+| 4 | Item 7 description said "Regulatory filings, strategic alternatives" | Corrected to purposes/plans/proposals per Reg M-A Item 1006(d): merger, delisting, asset sales, board changes, dividend policy |
+| 5 | Stage 6 node "Information about the subject company" duplicated Item 1 | Renamed "Additional company information / incorporation by reference" to clarify Item 8 catch-all role |
+| 6 | 402(t) node framed as "14D-9 Item" | Corrected to "Reg S-K Item 402(t), as applicable" — 402(t) is Regulation S-K, not a Schedule 14D-9 item |
+| 7 | Board Deliberation Freeze imposed hard ban on drafting | Softened to allow parallel drafting; ban applies to finalization/circulation of Item 4 language until board locks position |
 
 ## Usage
 

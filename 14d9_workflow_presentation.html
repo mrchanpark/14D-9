@@ -132,8 +132,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:
     <tr><td>4</td><td>The Solicitation or Recommendation</td><td>Stage 4 + Freeze</td><td>Board recommendation, reasons, factors. Requires Board Deliberation Freeze.</td></tr>
     <tr><td>5</td><td>Persons/Assets Retained, Employed, Compensated or Used</td><td>Stage 5</td><td>Financial advisor engagement terms, other retained persons</td></tr>
     <tr><td>6</td><td>Interest in Securities of the Subject Company</td><td>Stage 5</td><td>Director &#38; officer equity holdings, recent transactions</td></tr>
-    <tr><td>7</td><td>Purposes of the Transaction and Plans or Proposals</td><td>Stage 6</td><td>Regulatory filings, strategic alternatives, post-transaction plans</td></tr>
-    <tr><td>8</td><td>Additional Information</td><td>Stages 5&#8211;6</td><td>Catch-all: 402(t) golden parachute, appraisal rights, employment arrangements, safe harbor</td></tr>
+    <tr><td>7</td><td>Purposes of the Transaction and Plans or Proposals</td><td>Stage 6</td><td>Plans/proposals regarding the subject company: merger, delisting, extraordinary transactions, asset sales, board changes, dividend policy</td></tr>
+    <tr><td>8</td><td>Additional Information</td><td>Stages 5&#8211;6</td><td>Catch-all: golden parachute disclosure (Reg S-K Item 402(t)), appraisal rights, employment arrangements, safe harbor</td></tr>
     <tr><td>9</td><td>Exhibits</td><td>Stage 7</td><td>Fairness opinion, merger agreement, shareholder letter</td></tr>
   </table>
 </div>
@@ -261,7 +261,7 @@ flowchart TD
 </pre></div></section>
 
 <!-- BOARD DELIBERATION FREEZE -->
-<section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">&#9888; Freeze</span><h2>Board Deliberation &#8212; Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are &#128308; &#8212; purely human governance event. No recommendation drafting until the board votes and locks the position.</p>
+<section class="phase" id="bdf"><div class="phase-head"><span class="phase-tag" style="background:#7c3aed">&#9888; Freeze</span><h2>Board Deliberation &#8212; Required Before Recommendation</h2></div><p class="phase-sub">All 7 nodes are &#128308; &#8212; purely human governance event. Counsel may prepare alternative drafts in parallel, but no finalization or circulation of Item 4 language until the board votes and locks its position.</p>
 <div class="chart-card purple"><pre class="mermaid">
 flowchart TD
   BD1["Present financial analysis to board / committee"]:::red --> BD2["Present strategic alternatives analysis"]:::red
@@ -294,12 +294,12 @@ flowchart TD
 </pre></div></section>
 
 <!-- STAGE 5 -->
-<section class="phase" id="s5"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 5</span><h2>Conflicts, Interests & Governance</h2></div><p class="phase-sub">Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute 402(t) disclosure, employment arrangements, change-of-control provisions). Mixed &#128308;/&#128993;.</p>
+<section class="phase" id="s5"><div class="phase-head"><span class="phase-tag" style="background:#334155">Stage 5</span><h2>Conflicts, Interests & Governance</h2></div><p class="phase-sub">Covers Items 5 (persons retained/compensated), 6 (interest in securities), and portions of Item 8 (golden parachute disclosure per Reg S-K Item 402(t), employment arrangements, change-of-control provisions). Mixed &#128308;/&#128993;.</p>
 <div class="chart-card"><pre class="mermaid">
 flowchart TD
   A["Director & officer equity holdings (Item 6)"]:::yel --> B["Stock options, RSUs, equity award treatment"]:::yel
   B --> C["Change-of-control / severance provisions"]:::red
-  C --> D["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
+  C --> D["Golden parachute disclosure (Reg S-K Item 402(t), as applicable)"]:::yel
   D --> E["Ongoing employment arrangements with bidder"]:::red
   E --> F["Director relationships with bidder"]:::red
   F --> G["Special Committee independence confirmation"]:::red
@@ -320,7 +320,7 @@ flowchart TD
   B --> C["Identify regulatory approvals (HSR, CFIUS)"]:::red
   C --> D["Status of regulatory filings & timeline"]:::red
   D --> E["Forward-looking statements safe harbor"]:::grn
-  E --> F["Information about the subject company"]:::grn
+  E --> F["Additional company information / incorporation by reference"]:::grn
   F --> G["Intent to tender disclosures"]:::red
   G --> H["SEC compliance review — Regulation 14D"]:::red
   H --> I["Compile Legal & Regulatory sections"]:::grnC

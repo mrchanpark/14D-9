@@ -156,14 +156,14 @@ end
 %% STAGE 5: CONFLICTS, INTERESTS & GOVERNANCE
 %% Covers Items 5 (persons retained/compensated),
 %% Item 6 (interest in securities), and portions of
-%% Item 8 (golden parachute 402(t), employment
-%% arrangements, change-of-control provisions).
+%% Item 8 (golden parachute per Reg S-K 402(t),
+%% employment arrangements, change-of-control provisions).
 %% ══════════════════════════════════════════════════
 subgraph S5["Stage 5: Conflicts, Interests & Governance"]
   S5a["Director & officer equity holdings (Item 6)"]:::yel
   S5a --> S5b["Stock options, RSUs, equity award treatment"]:::yel
   S5b --> S5c["Change-of-control / severance provisions"]:::red
-  S5c --> S5d["Golden parachute calculations — 14D-9 Item 402(t) disclosure"]:::yel
+  S5c --> S5d["Golden parachute disclosure (Reg S-K Item 402(t), as applicable)"]:::yel
   S5d --> S5e["Ongoing employment / consulting arrangements with bidder"]:::red
   S5e --> S5f["Director relationships or arrangements with bidder"]:::red
   S5f --> S5g["Special Committee independence confirmation"]:::red
@@ -184,7 +184,7 @@ subgraph S6["Stage 6: Legal, Regulatory & Shareholder Rights"]
   S6b --> S6c["Identify regulatory approvals required (HSR, CFIUS, etc.)"]:::red
   S6c --> S6d["Status of regulatory filings & expected timeline"]:::red
   S6d --> S6e["Forward-looking statements safe harbor language"]:::grn
-  S6e --> S6f["Information about the subject company"]:::grn
+  S6e --> S6f["Additional company information / incorporation by reference"]:::grn
   S6f --> S6g["Intent to tender disclosures (directors & officers)"]:::red
   S6g --> S6h["SEC compliance review — Regulation 14D"]:::red
   S6h --> S6i["Compile Legal & Regulatory sections"]:::grnC
